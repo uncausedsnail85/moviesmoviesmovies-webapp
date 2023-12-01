@@ -8,6 +8,7 @@ function Navbar() {
     // page state
     const [searchTerm, setSearchTerm] = useState(); // keeps track of search term in search bar
 
+    // TODO: dynamic highlight active page
     return (
         <>
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
