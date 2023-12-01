@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import * as client from "../tmdbClient"
 
+// Search component
 function Search() {
 
     const navigate = useNavigate();
@@ -24,8 +25,6 @@ function Search() {
         }
         // else nothing
     }, [searchParam]); // if the searchParam ever changes, re-update the results
-
-    // client.findMovies("transformers");
     return (
         <div>
             <h1>Search</h1>

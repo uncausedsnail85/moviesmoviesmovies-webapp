@@ -8,6 +8,6 @@ export const findMovies = async (searchTerm) => {
     const response = await axios.get(
         url
     );
-    console.log(JSON.stringify(response))
+    // console.log(JSON.stringify(response))
     return response.data.results;
   };
