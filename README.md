@@ -5,3 +5,4 @@
 |---|---|---|
 | REACT_APP_TMDB_API_KEY | Api key to make calls |  |
 | REACT_APP_TMDB_URL | Base url |  |
+| REACT_APP_BASE_API_URL | | |

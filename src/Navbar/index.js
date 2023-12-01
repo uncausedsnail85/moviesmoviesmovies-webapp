@@ -36,6 +36,11 @@ function Navbar() {
                             onClick={() => navigate(`/search/${searchTerm}`)}>
                             Search</button>
                     </form>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-link"href="./#/signin">Sign in</a>
+                        </div>
+                    </div>
                 </div>
             </nav>
         </>

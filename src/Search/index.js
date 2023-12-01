@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import * as client from "../tmdbClient"
+import * as client from "../client/tmdbClient"
 
 // Search component
 function Search() {
