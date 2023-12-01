@@ -55,17 +55,16 @@ function Search() {
                 {results &&
                     results.map((movie, index) => (
                         <li key={index} className="list-group-item">
-                            {/* <Link to={`/project/details/${album.id}`}> */}
+                            
                             <img
                                 src={`https://image.tmdb.org/t/p/w92/${movie.poster_path}`}
                                 alt={movie.title}
                             />
-                            Title: {movie.title}
+                            <Link to={`/movie/${movie.id}`}> {movie.title}</Link>
                             <br />
                             Released: {movie.release_date}
                             <br />
                             {movie.overview}
-                            {/* </Link> */}
                         </li>
                     ))}
             </ul>

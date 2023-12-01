@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Home from './Home';
 import Search from './Search';
+import Movie from "./Movie";
 
 function App() {
 
@@ -12,14 +13,15 @@ function App() {
 
   return (
     <HashRouter>
-      <div class="container">
+      <div className="container">
         <h1>root</h1>
         <div>
           <Routes>
-            <Route path="/" element={<Navigate to="/Home" />} />
-            <Route path="/Home" element={<Home />} />
-            <Route path='/Search' element={<Search />} />
-            <Route path="/Search/:searchParam" element={<Search />} />
+            <Route path="/" element={<Navigate to="/home" />} />
+            <Route path="/home" element={<Home />} />
+            <Route path='/search' element={<Search />} />
+            <Route path="/search/:searchParam" element={<Search />} />
+            <Route path="/movie/:tmdbMovieId" element={<Movie />} />
           </Routes>
         </div>
       </div>

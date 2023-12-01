@@ -25,7 +25,7 @@ function Home() {
                 </div>
                 <div class="col-auto">
                     <button
-                        onClick={() => navigate(`/Search/${searchTerm}`)}
+                        onClick={() => navigate(`/search/${searchTerm}`)}
                         className="btn btn-primary float-end"
                     >
                         Search
