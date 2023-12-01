@@ -12,13 +12,16 @@ function App() {
 
   return (
     <HashRouter>
-      <h1>root</h1>
-      <div>
-        <Routes>
-          <Route path="/" element={<Navigate to="/Home" />} />
-          <Route path="/Home" element={<Home />} />
-          <Route path='/Search' element={<Search />} />
-        </Routes>
+      <div class="container">
+        <h1>root</h1>
+        <div>
+          <Routes>
+            <Route path="/" element={<Navigate to="/Home" />} />
+            <Route path="/Home" element={<Home />} />
+            <Route path='/Search' element={<Search />} />
+            <Route path="/Search/:searchParam" element={<Search />} />
+          </Routes>
+        </div>
       </div>
     </HashRouter>
   );

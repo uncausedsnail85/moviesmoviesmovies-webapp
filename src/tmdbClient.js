@@ -9,5 +9,5 @@ export const findMovies = async (searchTerm) => {
         url
     );
     console.log(JSON.stringify(response))
-    return response;
+    return response.data.results;
   };
