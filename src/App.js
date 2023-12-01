@@ -7,6 +7,7 @@ import Home from './Home';
 import Search from './Search';
 import Movie from "./Movie";
 import Navbar from "./Navbar";
+import Signin from "./Account/signin";
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
             <Route path='/search' element={<Search />} />
             <Route path="/search/:searchParam" element={<Search />} />
             <Route path="/movie/:tmdbMovieId" element={<Movie />} />
+            <Route path="/signin" element={<Signin/>} />
           </Routes>
         </div>
       </div>
