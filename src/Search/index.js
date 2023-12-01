@@ -28,8 +28,8 @@ function Search() {
     return (
         <div>
             <h1>Search</h1>
-            <div class="row">
-                <div class="col">
+            <div className="row">
+                <div className="col">
                     <input
                         type="text"
                         className="form-control"
@@ -40,7 +40,7 @@ function Search() {
                         }}
                     />
                 </div>
-                <div class="col-auto">
+                <div className="col-auto">
                     <button
                         onClick={() => navigate(`/Search/${searchTerm}`)}
                         className="btn btn-primary float-end"

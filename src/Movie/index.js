@@ -48,7 +48,7 @@ function Movie() {
                                 className="img-fluid"
                             />
                         </div>
-                        <div className="col-8">
+                        <div className="col">
                             <div className="row">
                                 {movie.overview}
                             </div>
@@ -58,15 +58,15 @@ function Movie() {
                             <div className="row">
                                 Likes:0
                             </div>
-                            <div className="row cast">
-                                Cast: {movieCredits.map(cast => cast.name).join(', ')}
-                            </div>
                         </div>
+                    </div>
+                    <div className="row cast">
+                        Cast: {movieCredits.map(cast => cast.name).join(', ')}
                     </div>
                 </div>
             )}
-            <>JSON movie:</>
-            <pre>{JSON.stringify(movie, null, 2)}</pre>
+            {/* <>JSON movie:</>
+            <pre>{JSON.stringify(movie, null, 2)}</pre> */}
         </>
     )
 }

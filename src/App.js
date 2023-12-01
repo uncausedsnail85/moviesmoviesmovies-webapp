@@ -6,6 +6,7 @@ import './App.css';
 import Home from './Home';
 import Search from './Search';
 import Movie from "./Movie";
+import Navbar from "./Navbar";
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
     <HashRouter>
       <div className="container">
         <h1>root</h1>
+        <Navbar/>
         <div>
           <Routes>
             <Route path="/" element={<Navigate to="/home" />} />
