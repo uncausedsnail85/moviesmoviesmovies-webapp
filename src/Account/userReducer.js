@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    user: null, // null because server responds null
+    user: "", // "" because server responds ""
 };
 
 const userSlice = createSlice({
@@ -12,7 +12,7 @@ const userSlice = createSlice({
             state.user = action.payload;
         },
         setUserToNull: (state, action) => {
-            state.user = null;
+            state.user = "";
         }
     },
 });

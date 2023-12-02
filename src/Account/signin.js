@@ -31,14 +31,14 @@ function Signin() {
     useEffect(() => {
         // check if already logged in, if so redirect
         // console.log(user)
-        if (user != null) {
+        if (user !== "") {
             navigate("/account");
         }
     }, []);
 
     return (
         <div>
-            <pre>{JSON.stringify(user, null, 2)}</pre>
+            {/* <pre>{JSON.stringify(user, null, 2)}</pre> */}
             <div class="wd-dashboard-header d-none d-sm-block">
                 <h3>Sign in</h3>
                 <hr />
