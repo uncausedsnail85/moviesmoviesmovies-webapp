@@ -1,0 +1,15 @@
+
+/* DETAIL PAGE */
+.m3-detailtitle {
+    border: solid gray 1px;
+    border-bottom: 0px;
+    border-top-right-radius: 16px;
+    border-top-left-radius: 16px;
+    padding: 8px;
+    padding-inline-start: 24px;
+    background-color:ivory;
+}
+
+.m3-detailcontainer {
+    background-color: g;
+  }

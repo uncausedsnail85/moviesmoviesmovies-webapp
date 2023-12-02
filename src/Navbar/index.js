@@ -31,8 +31,8 @@ function Navbar() {
                                 href="./#/home">
                                 Home</a>
                             <a
-                                className={`nav-link ${pathname.includes("movies") && "active"}`}
-                                href="./#/movies">
+                                className={`nav-link ${pathname.includes("details") && "active"}`}
+                                href="./#/details">
                                 Movies</a>
                         </div>
                     </div>

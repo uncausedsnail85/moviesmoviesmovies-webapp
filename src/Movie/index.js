@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import * as client from "../client/tmdbClient"
+import "./index.css";
 
+// DETAILS
 // component displaying the details of a movie
 // should have tmdbMovieId param
 function Movie() {
@@ -35,12 +37,12 @@ function Movie() {
 
     return (
         <>
-            <h1>Movie Page</h1>
             {movie && (
                 <div>
-                    <h2>{movie.title}</h2>
-                    <h3>Dir: {movie.director}</h3>
-                    <div className="row">
+                    <div className="m3-detailtitle">
+                        <h1>{movie.title}</h1>
+                    </div>
+                    <div className="row m3-detailcontainer">
                         <div className="col-4">
                             <img
                                 src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
@@ -65,10 +67,13 @@ function Movie() {
                     </div>
                 </div>
             )}
-            {/* <>JSON movie:</>
-            <pre>{JSON.stringify(movie, null, 2)}</pre> */}
+            {/* uncomment to see movie object */}
+            <>JSON movie:</>
+            <pre>{JSON.stringify(movie, null, 2)}</pre>
         </>
     )
 }
 
 export default Movie;
+
+// TODO: Additional info from db

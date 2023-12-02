@@ -37,7 +37,7 @@ function App() {
 
   return (
     <HashRouter>
-      <div className="container">
+      <div className="container m3-global">
         <h1>root</h1>
         <Navbar />
         <div>
@@ -46,7 +46,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path='/search' element={<Search />} />
             <Route path="/search/:searchParam" element={<Search />} />
-            <Route path="/movie/:tmdbMovieId" element={<Movie />} />
+            <Route path="/details/:tmdbMovieId" element={<Movie />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/signout" element={<Signout />} />
             <Route path="/user/:username" element={<Profile />} />

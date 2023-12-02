@@ -60,7 +60,7 @@ function Search() {
                                 src={`https://image.tmdb.org/t/p/w92/${movie.poster_path}`}
                                 alt={movie.title}
                             />
-                            <Link to={`/movie/${movie.id}`}> {movie.title}</Link>
+                            <Link to={`/details/${movie.id}`}> {movie.title}</Link>
                             <br />
                             Released: {movie.release_date}
                             <br />
