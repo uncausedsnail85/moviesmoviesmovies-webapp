@@ -2,10 +2,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import { FaRegCircleUser } from "react-icons/fa6";
-
-import { setUserToNull } from "../Account/userReducer";
+import { RiMovie2Line } from "react-icons/ri";
 
 function Navbar() {
 
@@ -22,7 +20,7 @@ function Navbar() {
         <>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
-                    <a className="navbar-brand" href="./#/home">logo</a>
+                    <a className="navbar-brand" href="./#/home"><RiMovie2Line />moviesmoviesmovies</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -36,10 +34,6 @@ function Navbar() {
                                 className={`nav-link ${pathname.includes("movies") && "active"}`}
                                 href="./#/movies">
                                 Movies</a>
-                            <a
-                                className={`nav-link ${pathname.includes("profile") && "active"}`}
-                                href={`./#/user/${user.username}`}>
-                                My Profile</a>
                         </div>
                     </div>
 
