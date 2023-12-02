@@ -16,6 +16,7 @@ import Navbar from "./Navbar";
 import Signin from "./Account/signin";
 import Signout from "./Account/signout.js";
 import Profile from "./Profile/index.js";
+import EditProfile from "./Profile/editProfile.js";
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
             <Route path="/signin" element={<Signin />} />
             <Route path="/signout" element={<Signout />} />
             <Route path="/user/:username" element={<Profile />} />
+            <Route path="/user/settings" element={<EditProfile />} />
           </Routes>
         </div>
       </div>

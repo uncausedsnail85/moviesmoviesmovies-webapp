@@ -1,6 +1,9 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import { FaRegCircleUser } from "react-icons/fa6";
 
 import { setUserToNull } from "../Account/userReducer";
 
@@ -37,39 +40,39 @@ function Navbar() {
                                 href={`./#/user/${user.username}`}>
                                 My Profile</a>
                         </div>
-                        {/* <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown Link
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </div> */}
                     </div>
+
+                    {/* Search bar */}
                     <form className="d-flex flex-grow-1" role="search">
                         <input className="form-control me-2 " type="search" placeholder="Search Movie" aria-label="Search"
                             value={searchTerm}
                             onChange={(event) => {
                                 setSearchTerm(event.target.value);
-                            }}
-
-                        />
+                            }} />
                         <button
                             className="btn btn-primary" type="submit"
                             onClick={() => navigate(`/search/${searchTerm}`)}>
                             Search</button>
                     </form>
 
-                    <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <div className="navbar-nav">
-                            {true && (<button
+                    <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                        <div className="navbar-nav ">
+                            {user == "" && (<button
                                 className="btn btn-info" type="submit"
                                 onClick={() => navigate(`/signin`)}>Sign in</button>)}
-                            {true && (<button
-                                className="btn btn-light" type="submit"
-                                onClick={() => navigate(`/signout`)}>Sign Out</button>)}
+                            {user != "" && (
+                                <Dropdown>
+                                    <Dropdown.Toggle variant="" id="dropdown-basic">
+                                        <FaRegCircleUser />
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item href={`#/user/${user.username}`}>My Profile</Dropdown.Item>
+                                        <Dropdown.Item href="#/user/settings">Account Settings</Dropdown.Item>
+                                        <Dropdown.Divider />
+                                        <Dropdown.Item href="#/signout">Sign out</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -79,7 +82,3 @@ function Navbar() {
 }
 
 export default Navbar
-
-// TODO: LOGIC FOR BUTTON SHOWING
-// TODO: ICONS
-// todo: dropdown profile, and edit profile and signout

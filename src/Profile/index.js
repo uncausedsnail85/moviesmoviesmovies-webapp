@@ -22,5 +22,3 @@ function Profile() {
 }
 
 export default Profile;
-
-//. TODO: Profile not refreshing when logout

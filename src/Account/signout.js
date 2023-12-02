@@ -19,14 +19,13 @@ function Signout() {
 
     const signout = async () => {
         const results = await client.signout();
-        console.log(`results: ${JSON.stringify(results)}`)
-        if (results === "200") {
+        // console.log(`results: ${JSON.stringify(results)}`)
+        if (results == 200) {
             dispatch(setUserToNull());
-            navigate(-1);
         } else {
             // TODO: inform user, dialog?
-            navigate(-1); 
         }
+        navigate(-1);
     };
 
     useEffect(() => {
@@ -37,8 +36,8 @@ function Signout() {
     return (
         <div>
             Signing out...
-            <pre>App state: {JSON.stringify(user, null, 2)}</pre>
-            <pre>Server state: {JSON.stringify(asd, null, 2)}</pre>
+            {/* <pre>App state: {JSON.stringify(user, null, 2)}</pre>
+            <pre>Server state: {JSON.stringify(asd, null, 2)}</pre> */}
         </div >
     );
 }
