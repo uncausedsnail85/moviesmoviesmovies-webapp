@@ -75,3 +75,5 @@ function Search() {
 }
 
 export default Search;
+
+// TODO: augment with likes when available
