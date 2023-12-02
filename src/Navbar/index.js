@@ -9,6 +9,7 @@ function Navbar() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { pathname } = useLocation();
+    const { user } = useSelector((state) => state.userReducer);
 
     // page state
     const [searchTerm, setSearchTerm] = useState(); // keeps track of search term in search bar
@@ -33,9 +34,19 @@ function Navbar() {
                                 Movies</a>
                             <a
                                 className={`nav-link ${pathname.includes("profile") && "active"}`}
-                                href="./#/profile">
-                                Profile</a>
+                                href={`./#/user/${user.username}`}>
+                                My Profile</a>
                         </div>
+                        {/* <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown Link
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </div> */}
                     </div>
                     <form className="d-flex flex-grow-1" role="search">
                         <input className="form-control me-2 " type="search" placeholder="Search Movie" aria-label="Search"
@@ -50,6 +61,7 @@ function Navbar() {
                             onClick={() => navigate(`/search/${searchTerm}`)}>
                             Search</button>
                     </form>
+
                     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div className="navbar-nav">
                             {true && (<button
@@ -70,3 +82,4 @@ export default Navbar
 
 // TODO: LOGIC FOR BUTTON SHOWING
 // TODO: ICONS
+// todo: dropdown profile, and edit profile and signout

@@ -48,7 +48,7 @@ function App() {
             <Route path="/movie/:tmdbMovieId" element={<Movie />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/signout" element={<Signout />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/user/:username" element={<Profile />} />
           </Routes>
         </div>
       </div>
