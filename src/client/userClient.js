@@ -17,7 +17,7 @@ export const signout = async () => {
     return response.data;
 };
 
-export const account = async () => {
+export const getLoggedInUser = async () => {
     const response = await request.post(`${USERS_API}/account`);
     return response.data;
 };
