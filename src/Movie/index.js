@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import * as client from "../client/tmdbClient"
+
 import "./index.css";
 
 // DETAILS
@@ -33,17 +34,25 @@ function Movie() {
     }, [])
 
     // ### helper functions ###
+    function minutesToHourAndMinutes(num) {
+        var hours = Math.floor(num / 60);
+        var minutes = num % 60;
+        return hours + "h " + minutes + "m";
+    }
 
 
     return (
         <>
             {movie && (
                 <div>
-                    <div className="m3-detailtitle">
-                        <h1>{movie.title}</h1>
+                    <div className="row m3-detailtitle">
+                        <div className="m3-detailtitle-text">
+                            <h1>{movie.title}</h1>
+                            {movie.release_date.slice(0, -6)} • {minutesToHourAndMinutes(movie.runtime)} • {movie.genres.map((genre) => genre.name).join(', ')}</div>
+                        <img src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} class="img-fluid" alt="Responsive image" />
                     </div>
                     <div className="row m3-detailcontainer">
-                        <div className="col-4">
+                        <div className="col-4 m3-img-col">
                             <img
                                 src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                                 alt={movie.title}
@@ -51,29 +60,27 @@ function Movie() {
                             />
                         </div>
                         <div className="col">
-                            <div className="row">
-                                {movie.overview}
-                            </div>
-                            <div className="row">
-                                Genres: {movie.genres.map((genre) => genre.name).join(', ')}
-                            </div>
-                            <div className="row">
-                                Likes:0
+
+                            <div class="d-flex align-items-start justify-content-around flex-column mb-3 h-100">
+                                <div class="p-2 m3-movie-overview">{movie.overview}</div>
+                                <div class="p-2">Likes:0</div>
                             </div>
                         </div>
                     </div>
+                    <hr/>
                     <div className="row cast">
                         Cast: {movieCredits.map(cast => cast.name).join(', ')}
                     </div>
                 </div>
             )}
             {/* uncomment to see movie object */}
-            <>JSON movie:</>
-            <pre>{JSON.stringify(movie, null, 2)}</pre>
+            {/* <>JSON movie:</>
+            <pre>{JSON.stringify(movie, null, 2)}</pre> */}
         </>
     )
 }
 
 export default Movie;
 
-// TODO: Additional info from db
+// TODO: Additional info from own db, i.e. likes
+// TODO: Add discussion section
