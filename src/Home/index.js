@@ -31,10 +31,10 @@ function Home() {
             {/* about banner */}
             <div className="m3-home-container m3-annonymoususer-welcome">
                 <div className="m3-annonymoususer-welcome-text">
-                    See what everyone is talking about your favorite movie.
+                    See what everyone is saying about your favorite movie.
                     <br />Even the cast members.
                 </div>
-                <img src={`pexels-lucas-pezeta-2398354.jpg`} class="img-fluid" alt="Responsive image" />
+                <img src={`tyson-moultrie-BQTHOGNHo08-unsplash.jpg`} class="img-fluid" alt="Responsive image" />
             </div>
 
             {/* TRENDING */}
@@ -71,3 +71,5 @@ function Home() {
 }
 
 export default Home;
+
+// TODO: ADD USER'S LIKES AND DISCUSSIONS

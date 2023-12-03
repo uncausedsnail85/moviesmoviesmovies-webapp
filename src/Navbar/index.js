@@ -19,7 +19,7 @@ function Navbar() {
     // TODO: dynamic highlight active page
     return (
         <>
-            <nav className="navbar navbar-expand-lg bg-body-tertiary m3-navbar">
+            <nav className="navbar navbar-expand-lg bg-primary-subtle  m3-navbar" data-bs-theme="dark">
                 <div className="container-fluid">
                     <a className="navbar-brand m3-homelogo" href="./#/home"><RiMovie2Line size={28} />moviesmoviesmovies</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
