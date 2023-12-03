@@ -43,7 +43,7 @@ function Home() {
                 {user != "" && <h2>Today's Trending</h2>}
                 <div className="d-flex flex-wrap m3-trending justify-content-center">
                     {trendingMovies && trendingMovies.map((trendingMovie) => (
-                        <div class="card wd-dashboard-card">
+                        <div class="card m3-trending-card">
                             <div class="card-body text-truncate" style={{ maxWidth: 186 }}>
                                 <img
                                     src={`https://image.tmdb.org/t/p/w154/${trendingMovie.poster_path}`}

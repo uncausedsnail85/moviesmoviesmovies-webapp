@@ -28,8 +28,9 @@
     bottom: 1px;
 }
 
-.m3-trendingcard {
-    width: 154px;
+.m3-trending-card {
+    margin-inline-end: 12px;
+    margin-bottom: 12px;
 }
 
 .m3-trendingbadge {
