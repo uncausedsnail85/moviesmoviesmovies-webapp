@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 
@@ -21,7 +21,7 @@ function Home() {
 
     return (
         <div>
-
+            
             {/* Title */}
             <div className="m3-home-container m3-home-title">
                 {user == "" && <h2>Welcome to moviesmoviesmovies!</h2>}
@@ -45,12 +45,14 @@ function Home() {
                     {trendingMovies && trendingMovies.map((trendingMovie) => (
                         <div class="card m3-trending-card">
                             <div class="card-body text-truncate" style={{ maxWidth: 186 }}>
-                                <img
-                                    src={`https://image.tmdb.org/t/p/w154/${trendingMovie.poster_path}`}
-                                    alt={trendingMovie.title}
-                                />
-                                <br />
-                                {trendingMovie.title} <br />
+                                <Link key={trendingMovies.id} to={`/details/${trendingMovie.id}`} className="card-link">
+                                    <img
+                                        src={`https://image.tmdb.org/t/p/w154/${trendingMovie.poster_path}`}
+                                        alt={trendingMovie.title}
+                                    />
+                                    <br />
+                                    {trendingMovie.title} <br />
+                                </Link>
                                 <span class="badge bg-success m3-trendingbadge">0 Likes</span>
                                 <span class="badge bg-success m3-trendingbadge">0 Discussions</span>
                             </div>
