@@ -31,10 +31,10 @@ function Navbar() {
                                 className={`nav-link ${pathname.includes("home") && "active"}`}
                                 href="./#/home">
                                 Home</a>
-                            <a
+                            {/* <a
                                 className={`nav-link ${pathname.includes("details") && "active"}`}
                                 href="./#/details">
-                                Movies</a>
+                                Movies</a> */}
                         </div>
                     </div>
 
