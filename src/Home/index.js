@@ -21,7 +21,7 @@ function Home() {
 
     return (
         <div>
-            
+
             {/* Title */}
             <div className="m3-home-container m3-home-title">
                 {user == "" && <h2>Welcome to moviesmoviesmovies!</h2>}
@@ -52,9 +52,9 @@ function Home() {
                                     />
                                     <br />
                                     {trendingMovie.title} <br />
+                                    <span class="badge bg-success m3-trendingbadge">0 Likes</span>
+                                    <span class="badge bg-success m3-trendingbadge">0 Discussions</span>
                                 </Link>
-                                <span class="badge bg-success m3-trendingbadge">0 Likes</span>
-                                <span class="badge bg-success m3-trendingbadge">0 Discussions</span>
                             </div>
                         </div>
                     ))}
@@ -75,3 +75,4 @@ function Home() {
 export default Home;
 
 // TODO: ADD USER'S LIKES AND DISCUSSIONS
+// TODO: 

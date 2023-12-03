@@ -12,7 +12,6 @@ function Profile() {
     const loggedInUser = useSelector((state) => state.userReducer).user; // get logged in state
     // const [user, setUser] = useState()
 
-
     return (
         <>
             <h2>Profile</h2>
@@ -24,25 +23,25 @@ function Profile() {
             <div class="row align-items-center m3-profile-row">
                 <div class="col-2 m3-profile-col1">
                     Username:</div>
-                    <div class="col-10 col-sm-7 col-xl-6" >
+                <div class="col-10 col-sm-7 col-xl-6" >
                     {pageUsername}</div>
             </div>
             <div class="row align-items-center m3-profile-row">
                 <div class="col-2 m3-profile-col1">
                     First name:</div>
-                    <div class="col-10 col-sm-7 col-xl-6" >
+                <div class="col-10 col-sm-7 col-xl-6" >
                     TODO: DB</div>
             </div>
             <div class="row align-items-center m3-profile-row">
                 <div class="col-2 m3-profile-col1">
                     Last name:</div>
-                    <div class="col-10 col-sm-7 col-xl-6" >
+                <div class="col-10 col-sm-7 col-xl-6" >
                     TODO: DB</div>
             </div>
             <div class="row align-items-center m3-profile-row">
                 <div class="col-2 m3-profile-col1">
                     Email:</div>
-                    <div class="col-10 col-sm-7 col-xl-6" >
+                <div class="col-10 col-sm-7 col-xl-6" >
                     TODO: DB</div>
             </div>
 

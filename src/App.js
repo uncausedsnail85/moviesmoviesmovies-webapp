@@ -17,6 +17,7 @@ import Signin from "./Account/signin";
 import Signout from "./Account/signout.js";
 import Profile from "./Profile/index.js";
 import EditProfile from "./Profile/editProfile.js";
+import Test from "./test.js";
 
 function App() {
 
@@ -25,7 +26,7 @@ function App() {
   // get logged in user from server. either will be null or user
   const getLoggedInUser = async () => {
     const user = await userClient.getLoggedInUser();
-    console.log(`user: ${JSON.stringify(user)}`);
+    // console.log(`user: ${JSON.stringify(user)}`);
     dispatch(setUser(user));
   };
 
@@ -50,6 +51,7 @@ function App() {
             <Route path="/signout" element={<Signout />} />
             <Route path="/profile/:username" element={<Profile />} />
             <Route path="/profile/settings" element={<EditProfile />} />
+            <Route path="/testresponse" element={<Test />} />
           </Routes>
         </div>
       </div>
