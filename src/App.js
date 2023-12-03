@@ -38,7 +38,6 @@ function App() {
   return (
     <HashRouter>
       <div className="container m3-global">
-        <h1>root</h1>
         <Navbar />
         <div>
           <Routes>

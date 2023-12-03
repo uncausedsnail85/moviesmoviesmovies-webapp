@@ -10,7 +10,7 @@ export const findMovies = async (searchTerm) => {
     );
     // console.log(JSON.stringify(response))
     return response.data.results;
-  };
+};
 
 export const getMovieDetailsfromTmdbId = async (tmdbId) => {
     const url = `${TMDB_URL}/movie/${tmdbId}?api_key=${TMDB_API_KEY}`
@@ -23,4 +23,10 @@ export const getMovieCreditsfromTmdbId = async (tmdbId) => {
     // 'https://api.themoviedb.org/3/movie/258480/credits?language=en-US'
     const response = await axios.get(url);
     return response.data.cast;
+}
+
+export const getPopularMovies = async () => {
+    const url = `${TMDB_URL}/movie/popular?language=en-US&page=1&api_key=${TMDB_API_KEY}`;
+    const response = await axios.get(url);
+    return response.data.results;   
 }

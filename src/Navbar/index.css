@@ -1,0 +1,12 @@
+.m3-navbar {
+    margin-bottom: 16px;
+    
+    border-radius: 26px;
+}
+
+.m3-homelogo {
+    color: rgb(4, 82, 4);
+    background-color: beige;
+    padding: 12px;
+    border-radius: 32px;
+}
