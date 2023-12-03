@@ -16,10 +16,16 @@ function Profile() {
         <>
             <h2>Profile</h2>
             {loggedInUser != "" && loggedInUser.username === pageUsername && (
-                <button
-                    className="btn btn-info" type="submit"
-                    onClick={() => navigate(`/profile/settings`)}>
-                    Edit Profile</button>)}
+                <div>
+                    <button
+                        className="btn btn-info" type="submit"
+                        onClick={() => navigate(`/profile/settings`)}>
+                        Edit Profile</button>
+                    <button
+                        className="btn btn-warning" type="submit"
+                        onClick={() => navigate(`/signout`)}>
+                        Sign Out</button>
+                </div>)}
             <div class="row align-items-center m3-profile-row">
                 <div class="col-2 m3-profile-col1">
                     Username:</div>

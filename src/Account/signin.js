@@ -58,13 +58,6 @@ function Signin() {
                 <br /><br />
                 <button onClick={signin}> Sign in </button>
                 <br />
-                {/* <Link to="/Kanbas/admin/users" className="btn btn-warning">
-                    Users
-                </Link>
-                <br/>
-                <Link to="/Kanbas/Signup" className="btn btn-primary">
-                    Sign Up
-                </Link> */}
 
             </div>
         </div >
