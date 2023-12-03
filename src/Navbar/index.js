@@ -58,11 +58,11 @@ function Navbar() {
                             {user != "" && (
                                 <Dropdown>
                                     <Dropdown.Toggle variant="" id="dropdown-basic">
-                                        <FaRegCircleUser />
+                                         {user.username} <FaRegCircleUser /> 
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu>
-                                        <Dropdown.Item href={`#/user/${user.username}`}>My Profile</Dropdown.Item>
-                                        <Dropdown.Item href="#/user/settings">Account Settings</Dropdown.Item>
+                                        <Dropdown.Item href={`#/profile/${user.username}`}>My Profile</Dropdown.Item>
+                                        <Dropdown.Item href="#/profile/settings">Account Settings</Dropdown.Item>
                                         <Dropdown.Divider />
                                         <Dropdown.Item href="#/signout">Sign out</Dropdown.Item>
                                     </Dropdown.Menu>
