@@ -32,7 +32,7 @@ function Signin() {
         // check if already logged in, if so redirect
         // console.log(user)
         if (user !== "") {
-            navigate(`/user/${user.username}`);
+            navigate(`/profile/${user.username}`);
         }
     }, []);
 
