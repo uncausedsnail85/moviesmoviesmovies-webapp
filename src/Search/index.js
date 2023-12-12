@@ -14,7 +14,7 @@ function Search() {
     // Get list of movie results
     const getSearchedMoviesResults = async (searchParam) => {
         const results = await client.findMovies(searchParam);
-        setResults(results);
+        setResults(results.slice(0, 4));
         setSearchTerm(searchParam)
     }
 
@@ -49,25 +49,32 @@ function Search() {
                     </button>
                 </div>
             </div>
+            <hr />
 
-            <h2>Results</h2>
+            <h2>Movies</h2>
             <ul className="list-group">
                 {results &&
                     results.map((movie, index) => (
-                        <li key={index} className="list-group-item">
-                            
-                            <img
-                                src={`https://image.tmdb.org/t/p/w92/${movie.poster_path}`}
-                                alt={movie.title}
-                            />
-                            <Link to={`/details/${movie.id}`}> {movie.title}</Link>
-                            <br />
-                            Released: {movie.release_date}
-                            <br />
-                            {movie.overview}
+                        <li key={index} className="list-group-item d-flex flex-row ">
+                            <div className="p-2">
+                                <img
+                                    src={`https://image.tmdb.org/t/p/w92/${movie.poster_path}`}
+                                    alt={movie.title}
+                                />
+                            </div>
+                            <div className="p-2">
+                                <h4><Link to={`/details/${movie.id}`}> {movie.title}</Link></h4>
+                                Released: {movie.release_date}
+                                <br />
+                                {movie.overview}
+                            </div>
                         </li>
                     ))}
             </ul>
+
+            <hr />
+            <h2>Users</h2>
+            WIP user search here
             {/* <>JSON results:</>
             <pre>{JSON.stringify(results, null, 2)}</pre> */}
         </div>
