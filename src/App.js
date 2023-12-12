@@ -18,6 +18,7 @@ import Signout from "./Account/signout.js";
 import Profile from "./Profile/index.js";
 import EditProfile from "./Profile/editProfile.js";
 import Test from "./test.js";
+import Signup from "./Account/signup.js";
 
 function App() {
 
@@ -48,6 +49,7 @@ function App() {
             <Route path="/details/:tmdbMovieId" element={<Movie />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/signout" element={<Signout />} />
+            <Route path="/signup" element={<Signup />} />
             <Route path="/profile/:username" element={<Profile />} />
             <Route path="/profile/settings" element={<EditProfile />} />
             <Route path="/testresponse" element={<Test />} />

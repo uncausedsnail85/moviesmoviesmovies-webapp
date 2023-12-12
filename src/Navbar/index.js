@@ -54,9 +54,15 @@ function Navbar() {
                     {/* user controls */}
                     <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                         <div className="navbar-nav ">
-                            {user == "" && (<button
-                                className="btn btn-info" type="submit"
-                                onClick={() => navigate(`/signin`)}>Sign in</button>)}
+                            {user == "" && (<div>
+                                <button
+                                    className="btn btn-info" type="submit"
+                                    onClick={() => navigate(`/signin`)}>Sign in</button>
+                                <button className="btn btn-warning ms-2"
+                                    onClick={() => navigate(`/signup`)} >
+                                    Sign Up </button>
+                            </div>
+                            )}
                             {user != "" && (
                                 <Dropdown>
                                     <Dropdown.Toggle variant="" id="dropdown-basic">
