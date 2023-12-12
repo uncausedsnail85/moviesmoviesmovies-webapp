@@ -9,7 +9,7 @@ function Results() {
         <div>
             <MovieResults maxResults={3} />
             <hr />
-            <UserResults maxResults={4} />
+            <UserResults maxResults={5} />
         </div>
     )
 }

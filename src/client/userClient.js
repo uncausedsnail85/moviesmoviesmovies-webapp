@@ -37,6 +37,11 @@ export const findAllUsers = async () => {
     return response.data;
 };
 
+export const findUserByUsername = async (username) => {
+    const response = await request.get(`${USERS_API}/username/${username}`);
+    return response.data;
+};
+
 // export const createUser = async (user) => {
 //     const response = await request.post(`${USERS_API}`, user);
 //     return response.data;

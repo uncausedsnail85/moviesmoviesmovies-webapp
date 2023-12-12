@@ -6,8 +6,6 @@ function SearchBar() {
     // var searchParam = "";
     let {searchParam}  = useParams(); // maintain "state" through URL encoding
     const [searchTerm, setSearchTerm] = useState(searchParam); // keeps track of search term in search bar
-    console.log(`searchParam: ${JSON.stringify(searchParam)}`)
-    console.log(`searchTerm: ${JSON.stringify(searchTerm)}`)
 
     return (<>
         <h1>Search</h1>

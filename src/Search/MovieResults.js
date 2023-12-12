@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams, useNavigate, Routes, Route } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import * as client from "../client/tmdbClient"
 
 // Search component
 function MovieResults({ maxResults = -1 }) {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const { searchParam } = useParams(); // maintain "state" through URL encoding
-    const [searchTerm, setSearchTerm] = useState(searchParam); // keeps track of search term in search bar
+    // const [searchTerm, setSearchTerm] = useState(searchParam); // keeps track of search term in search bar
     const [results, setResults] = useState(null); // keeps track of any displayed results
     const [untrimmedResultLength, setUntrimmedResultLength] = useState(-1);
 
     // Get list of movie results
     const getSearchedMoviesResults = async (searchParam) => {
         const results = await client.findMovies(searchParam);
+        if (results == null) {
+            return;
+        }
         setUntrimmedResultLength(results.length);
         if (maxResults < 0) {
             setResults(results)
