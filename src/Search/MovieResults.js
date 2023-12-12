@@ -58,7 +58,7 @@ function MovieResults({ maxResults = -1 }) {
                         </li>
                     ))}
             </ul>
-            {maxResults >= 0 && <div>
+            {maxResults >= 0 && untrimmedResultLength - maxResults > 0 && <div>
                 <Link to={`/Search/movies/${searchParam}`}>{untrimmedResultLength - maxResults} more results... </Link>
                 </div>}
             {/* <>JSON results:</>

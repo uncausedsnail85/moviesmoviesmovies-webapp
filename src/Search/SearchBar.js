@@ -7,6 +7,10 @@ function SearchBar() {
     let {searchParam}  = useParams(); // maintain "state" through URL encoding
     const [searchTerm, setSearchTerm] = useState(searchParam); // keeps track of search term in search bar
 
+    useEffect(() => {
+        setSearchTerm(searchParam)
+    }, [searchParam])
+
     return (<>
         <h1>Search</h1>
         <div className="row">
@@ -30,7 +34,8 @@ function SearchBar() {
                 </button>
             </div>
         </div>
-        <div className="d-flex flex-row">
+        <div className="mb-3 d-flex flex-row">
+        <div className="p-2 mt-1">Show only: </div>
             <div className="p-1 mt-1">
                 <button
                     className="btn btn-warning"
