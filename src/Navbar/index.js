@@ -40,7 +40,7 @@ function Navbar() {
 
                     {/* Search bar */}
                     <form className="d-flex flex-grow-1" role="search">
-                        <input className="form-control me-2 d-none d-lg-block" type="search" placeholder="Search Movie" aria-label="Search"
+                        <input className="form-control me-2 d-none d-lg-block" type="search" placeholder="Search" aria-label="Search"
                             value={searchTerm}
                             onChange={(event) => {
                                 setSearchTerm(event.target.value);

@@ -44,8 +44,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Navigate to="/home" />} />
             <Route path="/home" element={<Home />} />
-            <Route path='/search' element={<Search />} />
-            <Route path="/search/:searchParam" element={<Search />} />
+            <Route path='/search/*' element={<Search />} />
             <Route path="/details/:tmdbMovieId" element={<Movie />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/signout" element={<Signout />} />
