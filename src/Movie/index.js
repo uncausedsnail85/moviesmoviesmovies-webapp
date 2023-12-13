@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import * as client from "../client/tmdbClient"
-
+import * as likesClient from "../Likes/client"
 import "./index.css";
-
+import { useSelector } from "react-redux";
 // DETAILS
 // component displaying the details of a movie
 // should have tmdbMovieId param
 function Movie() {
+    
 
     const { tmdbMovieId } = useParams();
-
+    const { user } = useSelector((state) => state.userReducer);
     // page state
     const [movie, setMovie] = useState(null);
     const [movieCredits, setMovieCredits] = useState([])
 
+    
+    //SW 1212 working on likes
+    const currentUserLikesMovie = async (tmdbId) => {
+        const likes = await likesClient.createUserLikesMovie(user.username, tmdbId)
+
+    }
     // ### api calls ###
     const getMovieDetailsFromTmdbId = async (tmdbMovieId) => {
         const results = await client.getMovieDetailsfromTmdbId(tmdbMovieId);
@@ -29,8 +36,10 @@ function Movie() {
     }
 
     useEffect(() => {
+  
         getMovieDetailsFromTmdbId(tmdbMovieId)
         getMovieCreditsfromTmdbId(tmdbMovieId)
+   
     }, [])
 
     // ### helper functions ###
@@ -45,6 +54,7 @@ function Movie() {
         <>
             {movie && (
                 <div>
+                    
                     <div className="row m3-detailtitle">
                         <div className="m3-detailtitle-text">
                             <h1>{movie.title}</h1>
@@ -63,6 +73,15 @@ function Movie() {
 
                             <div class="d-flex align-items-start justify-content-around flex-column mb-3 h-100">
                                 <div class="p-2 m3-movie-overview">{movie.overview}</div>
+
+                                {/* //SW 1212 working on likes button*/}
+                                {user.username && (
+                                    <div>
+                                        <button>Like</button>
+                                    </div>
+                                )}
+
+
                                 <div class="p-2">Likes:0</div>
                             </div>
                         </div>
