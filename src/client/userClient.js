@@ -12,6 +12,11 @@ export const signin = async (credentials) => {
     return response.data;
 };
 
+export const signup = async(user) => {
+    const response = await request.post(`${USERS_API}/signup`, user);
+    return response.data;
+}
+
 export const signout = async () => {
     const response = await request.post(`${USERS_API}/signout`);
     return response.data;

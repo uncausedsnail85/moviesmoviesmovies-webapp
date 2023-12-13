@@ -32,11 +32,10 @@ function Signin() {
     const useQuery = () => new URLSearchParams(useLocation().search);
     const query = useQuery();
     const signupFlag = query.get('signupSuccessful');
-    console.log(`signupFlag: ${signupFlag}`)
 
     useEffect(() => {
         // check if already logged in, if so redirect
-        // console.log(user)
+        console.log(`user: ${user}`)
         if (user !== "") {
             navigate(`/profile/${user.username}`);
         }

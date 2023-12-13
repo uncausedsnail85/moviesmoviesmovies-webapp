@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import * as client from "../client/userClient";
+import { useSelector } from "react-redux";
 
 function Signup() {
 
+    // page state
+    const loggedInUser = useSelector((state) => state.userReducer).user;
     const [user, setUser] = useState({
         username: "",
         firstName: "",
@@ -17,18 +21,26 @@ function Signup() {
     const [error, setError] = useState("");
     const signup = async () => {
         try {
-            // await client.signup(user);
+            await client.signup(user);
             navigate("/signin?signupSuccessful=true");
         } catch (err) {
             setError(err.response.data.message);
         }
     };
 
+    useEffect(() => {
+        // check if already logged in, if so redirect
+        console.log(`loggedInUser: ${loggedInUser}`)
+        if (loggedInUser !== "") {
+            navigate(`/home`);
+        }
+    }, []);
+
     return (<>
         <h3>Signup</h3>
         {error && (
             <div className="alert alert-danger mb-2 mt-2">
-                Error signing up. Please try again.
+                {error}
             </div>
         )}
         <form className="">
@@ -107,12 +119,13 @@ function Signup() {
                     Admin</label>
             </div>
         </form>
-        < button className="btn btn-warning mt-3 me-3">
+        < button className="btn btn-warning mt-3 me-3" onClick={signup}>
             Sign Up
         </button>
         <button className="btn btn-secondary mt-3" onClick={() => navigate(-1)}>
             Cancel
         </button>
+        <br />
         <>User object:</>
         <pre>{JSON.stringify(user, null, 2)}</pre>
     </>)
