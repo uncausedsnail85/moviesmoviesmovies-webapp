@@ -15,6 +15,7 @@ function Home() {
         setTrendingMovies(results.slice(0, 6));
     }
 
+
     useEffect(() => {
         getTrendingMovies();
     }, []);
@@ -25,7 +26,7 @@ function Home() {
             {/* Title */}
             <div className="m3-home-container m3-home-title">
                 {user == "" && <h2>Welcome to moviesmoviesmovies!</h2>}
-                {user != "" && <h2>Welcome back to moviesmoviesmovies!</h2>}
+                {user.username && <h2>Welcome back to moviesmoviesmovies!</h2>}
             </div>
 
             {/* about banner */}
@@ -40,7 +41,7 @@ function Home() {
             {/* TRENDING */}
             <div className="m3-home-container ">
                 {user == "" && <h2>Check out trending shows</h2>}
-                {user != "" && <h2>Today's Trending</h2>}
+                {user.username && <h2>Today's Trending</h2>}
                 <div className="d-flex flex-wrap m3-trending justify-content-center">
                     {trendingMovies && trendingMovies.map((trendingMovie) => (
                         <div class="card m3-trending-card">
@@ -52,6 +53,9 @@ function Home() {
                                     />
                                     <br />
                                     {trendingMovie.title} <br />
+
+                    
+                                    <button>Likes</button>
                                     <span class="badge bg-success m3-trendingbadge">0 Likes</span>
                                     <span class="badge bg-success m3-trendingbadge">0 Discussions</span>
                                 </Link>

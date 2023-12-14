@@ -15,13 +15,15 @@ function Movie() {
     // page state
     const [movie, setMovie] = useState(null);
     const [movieCredits, setMovieCredits] = useState([])
-
+    const [likes, setLikes] = useState([]);
     
     //SW 1212 working on likes
     const currentUserLikesMovie = async (tmdbId) => {
-        const likes = await likesClient.createUserLikesMovie(user.username, tmdbId)
+        const likes = await likesClient.createUserLikesMovie(user.username, tmdbId);
+        setLikes([likes, ...likes]);
 
-    }
+    };
+
     // ### api calls ###
     const getMovieDetailsFromTmdbId = async (tmdbMovieId) => {
         const results = await client.getMovieDetailsfromTmdbId(tmdbMovieId);
@@ -36,7 +38,6 @@ function Movie() {
     }
 
     useEffect(() => {
-  
         getMovieDetailsFromTmdbId(tmdbMovieId)
         getMovieCreditsfromTmdbId(tmdbMovieId)
    
@@ -77,7 +78,7 @@ function Movie() {
                                 {/* //SW 1212 working on likes button*/}
                                 {user.username && (
                                     <div>
-                                        <button>Like</button>
+                                        <button onClick={currentUserLikesMovie}>Like</button>
                                     </div>
                                 )}
 

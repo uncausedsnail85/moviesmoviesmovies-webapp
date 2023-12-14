@@ -30,3 +30,10 @@ export const getPopularMovies = async () => {
     const response = await axios.get(url);
     return response.data.results;   
 }
+
+export const findMovieByTmdbId = async (tmdbId) => {
+    const response = await axios.get(
+      `${TMDB_URL}/movie/${tmdbId}?apikey=${TMDB_API_KEY}`
+    );
+    return response.data.movie[0];
+  };
