@@ -7,6 +7,8 @@ import MovieResults from "./MovieResults.js";
 import UserResults from "./UserResults.js";
 import TvShowResults from "./TvShowResults.js";
 import CompanyResults from "./CompanyResults.js";
+import "./index.css";
+
 
 // Search component
 function Search() {

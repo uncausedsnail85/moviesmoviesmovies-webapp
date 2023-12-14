@@ -93,8 +93,8 @@ function Company() {
             )}
 
             {/* uncomment to see company object */}
-            <>JSON:</>
-            <pre>{JSON.stringify(company, null, 2)}</pre>
+            {/* <>JSON:</>
+            <pre>{JSON.stringify(company, null, 2)}</pre> */}
         </>
     )
 }
