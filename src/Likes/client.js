@@ -27,5 +27,10 @@ export const findUsernamesThatLikeMovie = async (tmdbId) => {
 };
 
 
-export const findAllMoviesUserLikes = async (username) => { };
+export const findAllMoviesUserLikes = async (username) => {
+    const response = await axios.get(`${USERS_API}/${username}/likes`);
+    // "/api/users/:username/likes"
+    console.log(JSON.stringify(response.data))
+    return response.data
+};
 

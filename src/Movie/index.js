@@ -68,7 +68,7 @@ function Movie() {
                         <div className="m3-detailtitle-text">
                             <h1>{movie.title}</h1>
                             {movie.release_date.slice(0, -6)} • {minutesToHourAndMinutes(movie.runtime)} • {movie.genres.map((genre) => genre.name).join(', ')}</div>
-                        <img src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} class="img-fluid" alt="Responsive image" />
+                        <img src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} class="img-fluid" alt="Movie Backdrop" />
                     </div>
                     <div className="row m3-detailcontainer">
                         <div className="col-4 m3-img-col">

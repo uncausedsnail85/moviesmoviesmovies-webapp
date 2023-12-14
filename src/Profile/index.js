@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import * as client from "../client/userClient";
+import * as likesClient from "../Likes/client"
+import * as tmdbClient from "../client/tmdbClient"
 import "./index.css";
 
 // shows the profile page of a particular user
@@ -12,7 +14,9 @@ function Profile() {
     const pageUsername = useParams().username;
     const loggedInUser = useSelector((state) => state.userReducer).user; // get logged in state
     const [pageUser, setPageUser] = useState(null);
-    const [pageOwnerFlag, setPageOwnerFlag] = useState(false)
+    const [pageOwnerFlag, setPageOwnerFlag] = useState()
+    const [likedMovieIds, setlikedMovieIds] = useState();
+    const [likedMoviesObjects, setLikedMoviesObjects] = useState([]);
 
     const getPageUser = async () => {
         if (pageUsername == loggedInUser.username) {
@@ -25,9 +29,35 @@ function Profile() {
         }
     }
 
+    const getlikedMovieIds = async () => {
+        if (!pageUser) {
+            return;
+        }
+        const results = await likesClient.findAllMoviesUserLikes(pageUsername);
+        setlikedMovieIds(results);
+    }
+
+    const getLikedMovieObjects = async () => {
+        let objArray = [];
+        if (likedMovieIds) {
+            for (let i = 0; i < likedMovieIds.length; i++) {
+                let movie = await tmdbClient.getMovieDetailsfromTmdbId(likedMovieIds[i].tmdbId)
+                objArray.push(movie);
+            }
+            setLikedMoviesObjects(objArray);
+        }
+    }
+
+
     useEffect(() => {
         getPageUser();
     }, [pageUsername])
+    useEffect(() => {
+        getlikedMovieIds();
+    }, [pageUser])
+    useEffect(() => {
+        getLikedMovieObjects()
+    }, [likedMovieIds])
 
     return (
         <>
@@ -53,7 +83,7 @@ function Profile() {
                 </div>
             </>}
 
-            {pageUser && pageOwnerFlag &&
+            {pageUser && loggedInUser.username === pageUsername &&
                 <div class="row align-items-center m3-profile-row">
                     <div class="col-2 m3-profile-col1">
                         Email:</div>
@@ -73,8 +103,30 @@ function Profile() {
                         Sign Out</button>
                 </div>)}
 
-            <h2>Likes</h2>
+            <h2 className="pt-3">Likes</h2>
 
+            {/* <pre>{JSON.stringify(likedMovieIds, null, 2)}</pre>
+            <pre>{JSON.stringify(likedMoviesObjects, null, 2)}</pre> */}
+            <ul className="list-group">
+                {
+                    likedMoviesObjects.map((likedMovie, index) => {
+                        return (
+                            <li key={index} className="list-group-item d-flex flex-row ">
+                                <div className="p-2">
+                                    {likedMovie.poster_path && <img
+                                        src={`https://image.tmdb.org/t/p/w92/${likedMovie.poster_path}`}
+                                        alt={likedMovie.title}
+                                    />}
+                                </div>
+                                <div className="p-2">
+                                    <h4><Link to={`/details/${likedMovie.id}`}> {likedMovie.title}</Link></h4>
+                                    Released: {likedMovie.release_date}
+                                    <br />
+                                    {likedMovie.overview}
+                                </div>
+                            </li>)
+                    })}
+            </ul>
             {/* <>JSON ccurrent logged in user:</>
             <pre>{JSON.stringify(loggedInUser, null, 2)}</pre> */}
         </>
