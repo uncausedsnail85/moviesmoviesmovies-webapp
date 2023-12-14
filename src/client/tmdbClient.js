@@ -83,3 +83,10 @@ export const getReviewsFromMovieId = async (tmdbId) => {
     const response = await axios.get(url);
     return response.data.results;
 }
+
+export const getReviewsFromShowId = async (tmdbId) => {
+    const url = `${TMDB_URL}/tv/${tmdbId}/reviews?api_key=${TMDB_API_KEY}`
+    //https://api.themoviedb.org/3/tv/{series_id}/reviews
+    const response = await axios.get(url);
+    return response.data.results;
+}

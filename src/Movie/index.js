@@ -130,7 +130,7 @@ function Movie() {
                                 </div>
                             </>
                         ))}
-
+                        {reviews.length == 0 && "No reviews founds"}
 
                 </div>
             )}
