@@ -85,12 +85,12 @@ function Home() {
             </div>
 
             {/* User's likes and discussions */}
-            {user != "" && (
+            {/* {user != "" && (
                 <div>
                     <h2>Your Likes</h2>
                     <h2>Your Discussions</h2>
                 </div>
-            )}
+            )} */}
         </div>
     )
 }
