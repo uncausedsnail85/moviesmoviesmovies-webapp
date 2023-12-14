@@ -15,7 +15,7 @@ function Home() {
 
     const getTrendingMovies = async () => {
         let results = await tmdbClient.getPopularMovies();
-        results = results.slice(0, 6);
+        results = results.slice(0, 12);
         await setTrendingMovies(results);
     }
 
