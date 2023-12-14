@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 // component displaying the details of a movie
 // should have tmdbMovieId param
 function Movie() {
-    
+
 
     const { tmdbMovieId } = useParams();
     const { user } = useSelector((state) => state.userReducer);
@@ -16,13 +16,20 @@ function Movie() {
     const [movie, setMovie] = useState(null);
     const [movieCredits, setMovieCredits] = useState([])
     const [likes, setLikes] = useState([]);
-    
+
     //SW 1212 working on likes
     const currentUserLikesMovie = async (tmdbId) => {
         const likes = await likesClient.createUserLikesMovie(user.username, tmdbId);
-        setLikes([likes, ...likes]);
+        await getLikes(tmdbId);
 
     };
+
+    const getLikes = async (tmdbId) => {
+        const results = await likesClient.findUsernamesThatLikeMovie(tmdbId);
+        const flatResult = results.map(obj => obj.username);
+        // console.log(JSON.stringify(flatResult))
+        setLikes(flatResult);
+    }
 
     // ### api calls ###
     const getMovieDetailsFromTmdbId = async (tmdbMovieId) => {
@@ -34,13 +41,14 @@ function Movie() {
         const results = await client.getMovieCreditsfromTmdbId(tmdbMovieId);
         const filteredResults = results.filter((cast) => cast.known_for_department === "Acting" && cast.order < 11)
         setMovieCredits(filteredResults);
-        console.log(JSON.stringify(filteredResults));
+        // console.log(JSON.stringify(filteredResults));
     }
 
     useEffect(() => {
         getMovieDetailsFromTmdbId(tmdbMovieId)
         getMovieCreditsfromTmdbId(tmdbMovieId)
-   
+        getLikes(tmdbMovieId);
+
     }, [])
 
     // ### helper functions ###
@@ -55,7 +63,7 @@ function Movie() {
         <>
             {movie && (
                 <div>
-                    
+
                     <div className="row m3-detailtitle">
                         <div className="m3-detailtitle-text">
                             <h1>{movie.title}</h1>
@@ -71,24 +79,25 @@ function Movie() {
                             />
                         </div>
                         <div className="col">
-
-                            <div class="d-flex align-items-start justify-content-around flex-column mb-3 h-100">
+                            <div class="d-flex align-items-start justify-content-between flex-column mb-3 h-100">
                                 <div class="p-2 m3-movie-overview">{movie.overview}</div>
 
-                                {/* //SW 1212 working on likes button*/}
-                                {user.username && (
-                                    <div>
-                                        <button onClick={currentUserLikesMovie}>Like</button>
+                                <div class="p-2">
+                                    <b>{likes.length}</b> people like this movie
+                                    <br />
+                                    <div className="mt-2 mb-3 fs-6" >
+                                        {likes.map(username => (<>
+                                            <Link to={`/profile/${username}`}>{username}</Link>, </>))}
                                     </div>
-                                )}
-
-
-                                <div class="p-2">Likes:0</div>
+                                    {user.username && (
+                                        <button className="btn btn-primary" onClick={() => { currentUserLikesMovie(movie.id) }}>Like</button>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <hr/>
-                    <div className="row cast">
+                    <hr />
+                    <div className="row cast mb-5">
                         Cast: {movieCredits.map(cast => cast.name).join(', ')}
                     </div>
                 </div>
