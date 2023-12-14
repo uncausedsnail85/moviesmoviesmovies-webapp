@@ -14,11 +14,8 @@ function EditProfile() {
 
     const updateUser = async () => {
         try {
-            console.log("1")
             await client.updateUser(user);
-            console.log("2")
             dispatch(setUser(user));
-            console.log("3")
             navigate(`/profile/${user.username}`);
         } catch (err) {
             console.log(`err: ${JSON.stringify(err)}`)
@@ -128,8 +125,8 @@ function EditProfile() {
             Cancel
         </button>
         <br />
-        <>Logged inUser :</>
-        <pre>{JSON.stringify(loggedInUser, null, 2)}</pre>
+        {/* <>Logged inUser :</>
+        <pre>{JSON.stringify(loggedInUser, null, 2)}</pre> */}
     </>)
 }
 

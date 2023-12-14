@@ -35,7 +35,7 @@ function Signin() {
 
     useEffect(() => {
         // check if already logged in, if so redirect
-        console.log(`user: ${user}`)
+        // console.log(`user: ${user}`)
         if (user !== "") {
             navigate(`/profile/${user.username}`);
         }

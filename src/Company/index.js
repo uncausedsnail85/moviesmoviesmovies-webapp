@@ -87,8 +87,8 @@ function Company() {
                                 </li>
                             ))}
                     </ul>
-                    <>JSON results:</>
-            <pre>{JSON.stringify(results, null, 2)}</pre>
+                    {/* <>JSON results:</>
+            <pre>{JSON.stringify(results, null, 2)}</pre> */}
                 </div>
             )}
 

@@ -35,7 +35,7 @@ function TvShow() {
         const results = await client.getShowCreditsfromTmdbId(tmdbId);
         const filteredResults = results.filter((cast) => cast.known_for_department === "Acting" && cast.order < 11)
         setMovieCredits(filteredResults);
-        console.log(JSON.stringify(filteredResults));
+        // console.log(JSON.stringify(filteredResults));
     }
 
     const getMovieLikes = async (tmdbId) => {

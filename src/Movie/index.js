@@ -114,8 +114,8 @@ function Movie() {
                 </div>
             )}
             {/* uncomment to see movie object */}
-            <>JSON movie:</>
-            <pre>{JSON.stringify(movie, null, 2)}</pre>
+            {/* <>JSON movie:</>
+            <pre>{JSON.stringify(movie, null, 2)}</pre> */}
         </>
     )
 }

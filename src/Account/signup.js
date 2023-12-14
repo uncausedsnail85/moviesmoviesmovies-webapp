@@ -30,7 +30,7 @@ function Signup() {
 
     useEffect(() => {
         // check if already logged in, if so redirect
-        console.log(`loggedInUser: ${loggedInUser}`)
+        // console.log(`loggedInUser: ${loggedInUser}`)
         if (loggedInUser !== "") {
             navigate(`/home`);
         }
