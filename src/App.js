@@ -13,6 +13,7 @@ import Home from './Home';
 import Search from './Search';
 import Movie from "./Movie";
 import TvShow from "./TvShow/index.js";
+import Company from "./Company/index.js";
 import Navbar from "./Navbar";
 import Signin from "./Account/signin";
 import Signout from "./Account/signout.js";
@@ -49,6 +50,7 @@ function App() {
             <Route path='/search/*' element={<Search />} />
             <Route path="/details/:tmdbMovieId" element={<Movie />} />
             <Route path="/details/show/:tmdbId" element={<TvShow />} />
+            <Route path="/details/company/:tmdbId" element={<Company />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/signout" element={<Signout />} />
             <Route path="/signup" element={<Signup />} />
