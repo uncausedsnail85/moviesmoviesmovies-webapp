@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 // component displaying the details of a movie
 // should have tmdbMovieId param
 function Movie() {
-    
+
 
     const { tmdbMovieId } = useParams();
     const { user } = useSelector((state) => state.userReducer);
@@ -16,7 +16,7 @@ function Movie() {
     const [movie, setMovie] = useState(null);
     const [movieCredits, setMovieCredits] = useState([])
 
-    
+
     //SW 1212 working on likes
     const currentUserLikesMovie = async (tmdbId) => {
         const likes = await likesClient.createUserLikesMovie(user.username, tmdbId)
@@ -36,10 +36,10 @@ function Movie() {
     }
 
     useEffect(() => {
-  
+
         getMovieDetailsFromTmdbId(tmdbMovieId)
         getMovieCreditsfromTmdbId(tmdbMovieId)
-   
+
     }, [])
 
     // ### helper functions ###
@@ -54,7 +54,7 @@ function Movie() {
         <>
             {movie && (
                 <div>
-                    
+
                     <div className="row m3-detailtitle">
                         <div className="m3-detailtitle-text">
                             <h1>{movie.title}</h1>
@@ -86,15 +86,26 @@ function Movie() {
                             </div>
                         </div>
                     </div>
-                    <hr/>
+                    <hr />
                     <div className="row cast">
                         Cast: {movieCredits.map(cast => cast.name).join(', ')}
+                    </div>
+                    <div className="d-flex flex-row mt-3 mb-3 companies align-items-center ">
+                        {movie.production_companies.map((company, index) =>
+                            <div className="ps-3 pe-3 border-end border-start "><Link to={`/details/company/${company.id}`}>
+                                {company.logo_path && <img
+                                    src={`https://image.tmdb.org/t/p/w92/${company.logo_path}`}
+                                    alt={company.name}
+                                />}
+                                {!company.logo_path && company.name}
+                            </Link></div>
+                        )}
                     </div>
                 </div>
             )}
             {/* uncomment to see movie object */}
-            {/* <>JSON movie:</>
-            <pre>{JSON.stringify(movie, null, 2)}</pre> */}
+            <>JSON movie:</>
+            <pre>{JSON.stringify(movie, null, 2)}</pre>
         </>
     )
 }
