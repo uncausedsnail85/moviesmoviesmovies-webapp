@@ -38,7 +38,7 @@ function MovieResults({ maxResults = -1 }) {
     return (
         <div>
             <h2>Movies</h2>
-            {/* {results.length == 0 && "No matching results"} */}
+            {results && results.length == 0 && "No matching results"}
             <ul className="list-group">
                 {results &&
                     results.map((movie, index) => (

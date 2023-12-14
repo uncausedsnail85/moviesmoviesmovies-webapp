@@ -40,7 +40,7 @@ function TvShowResults({ maxResults = -1 }) {
 
             <h2>TV Shows</h2>
             <ul className="list-group">
-                {/* {results.length == 0 && "No matching results"} */}
+                {results && results.length == 0 && "No matching results"}
                 {results &&
                     results.map((show, index) => (
                         <li key={index} className="list-group-item d-flex flex-row ">
