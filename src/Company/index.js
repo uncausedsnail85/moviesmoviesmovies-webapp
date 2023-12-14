@@ -6,7 +6,7 @@ import * as client from "../client/tmdbClient"
 import * as likesClient from "../Likes/client"
 import "./index.css";
 import { useSelector } from "react-redux";
-import { FaLocationDot, FaLink } from "react-icons/fa6"; 
+import { FaLocationDot, FaLink } from "react-icons/fa6";
 
 // DETAILS
 // component displaying the details of a tvshow
@@ -19,6 +19,7 @@ function Company() {
     // page state
     const [company, setCompany] = useState(null);
     const [likes, setLikes] = useState([0]);
+    const [results, setResults] = useState(null); // keeps track of any displayed results
 
 
     //SW 1212 working on likes
@@ -32,10 +33,16 @@ function Company() {
         setCompany(results);
     }
 
+    const getCompanyMovies = async (companyId) => {
+        const results = await client.getMoviesFromCompanyId(companyId);
+        setResults(results)
+    }
+
 
     useEffect(() => {
 
         getCompanyDetailsFromTmdbId(tmdbId)
+        getCompanyMovies(tmdbId)
 
     }, [])
 
@@ -59,8 +66,32 @@ function Company() {
                         </div>
                     </div>
                     <hr />
+                    <h2>Movies</h2>
+                    {results && results.length == 0 && "No matching results"}
+                    <ul className="list-group">
+                        {results &&
+                            results.map((movie, index) => (
+                                <li key={index} className="list-group-item d-flex flex-row ">
+                                    <div className="p-2">
+                                        <img
+                                            src={`https://image.tmdb.org/t/p/w92/${movie.poster_path}`}
+                                            alt={movie.title}
+                                        />
+                                    </div>
+                                    <div className="p-2">
+                                        <h4><Link to={`/details/${movie.id}`}> {movie.title}</Link></h4>
+                                        Released: {movie.release_date}
+                                        <br />
+                                        {movie.overview}
+                                    </div>
+                                </li>
+                            ))}
+                    </ul>
+                    <>JSON results:</>
+            <pre>{JSON.stringify(results, null, 2)}</pre>
                 </div>
             )}
+
             {/* uncomment to see company object */}
             <>JSON:</>
             <pre>{JSON.stringify(company, null, 2)}</pre>

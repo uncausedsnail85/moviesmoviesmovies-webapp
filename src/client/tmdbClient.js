@@ -29,7 +29,7 @@ export const getMovieCreditsfromTmdbId = async (tmdbId) => {
 export const getPopularMovies = async () => {
     const url = `${TMDB_URL}/movie/popular?language=en-US&page=1&api_key=${TMDB_API_KEY}`;
     const response = await axios.get(url);
-    return response.data.results;   
+    return response.data.results;
 }
 
 
@@ -67,4 +67,12 @@ export const getCompanyDetailsfromTmdbId = async (tmdbId) => {
     // https://api.themoviedb.org/3/company/{company_id}
     const response = await axios.get(url);
     return response.data;
+}
+
+export const getMoviesFromCompanyId = async (companyId) => {
+    const url = `${TMDB_URL}/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_companies=${companyId}&api_key=${TMDB_API_KEY}`
+    // 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_companies=4' 
+    const response = await axios.get(url);
+    console.log(`response: ${JSON.stringify(response.data)}`)
+    return response.data.results;
 }
