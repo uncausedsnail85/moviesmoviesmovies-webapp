@@ -21,6 +21,7 @@ import Profile from "./Profile/index.js";
 import EditProfile from "./Profile/editProfile.js";
 import Test from "./test.js";
 import Signup from "./Account/signup.js";
+import UserTable from "./Profile/UserTable.js";
 
 function App() {
 
@@ -57,6 +58,7 @@ function App() {
             <Route path="/profile/:username" element={<Profile />} />
             <Route path="/profile/settings" element={<EditProfile />} />
             <Route path="/testresponse" element={<Test />} />
+            <Route path="/profile/usertable" element={<UserTable />} />
           </Routes>
         </div>
       </div>

@@ -101,6 +101,12 @@ function Profile() {
                         className="btn btn-warning ms-3" type="submit"
                         onClick={() => navigate(`/signout`)}>
                         Sign Out</button>
+                    {loggedInUser && loggedInUser.role === "ADMIN" &&
+                        <button
+                            className="btn btn-danger ms-3" type="submit"
+                            onClick={() => navigate(`/profile/usertable`)}>
+                            User Table</button>
+                    }
                 </div>)}
 
             <h2 className="pt-3">Likes</h2>

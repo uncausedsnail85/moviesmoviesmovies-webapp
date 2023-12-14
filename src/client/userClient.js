@@ -48,21 +48,21 @@ export const findUserByUsername = async (username) => {
     return response.data;
 };
     
-// export const createUser = async (user) => {
-//     const response = await request.post(`${USERS_API}`, user);
-//     return response.data;
-// };
+export const createUser = async (user) => {
+    const response = await request.post(`${USERS_API}`, user);
+    return response.data;
+};
 
 // export const findUserById = async (id) => {
 //     const response = await request.get(`${USERS_API}/${id}`);
 //     return response.data;
 // };
 
-// export const deleteUser = async (user) => {
-//     const response = await request.delete(
-//         `${USERS_API}/${user._id}`);
-//     return response.data;
-// };
+export const deleteUser = async (user) => {
+    const response = await request.delete(
+        `${USERS_API}/${user._id}`);
+    return response.data;
+};
 
 // export const signup = async (credentials) => {
 //     const response = await request.post(
