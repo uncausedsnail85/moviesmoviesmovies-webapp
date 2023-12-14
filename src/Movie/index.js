@@ -16,6 +16,7 @@ function Movie() {
     const [movie, setMovie] = useState(null);
     const [movieCredits, setMovieCredits] = useState([])
     const [likes, setLikes] = useState([]);
+    const [reviews, setReviews] = useState([]);
 
     //SW 1212 working on likes
     const currentUserLikesMovie = async (tmdbId) => {
@@ -44,11 +45,16 @@ function Movie() {
         // console.log(JSON.stringify(filteredResults));
     }
 
+    const getMovieReviews = async (tmdbMovieId) => {
+        const results = await client.getReviewsFromMovieId(tmdbMovieId);
+        setReviews(results);
+    }
+
     useEffect(() => {
         getMovieDetailsFromTmdbId(tmdbMovieId)
         getMovieCreditsfromTmdbId(tmdbMovieId)
         getLikes(tmdbMovieId);
-
+        getMovieReviews(tmdbMovieId);
     }, [])
 
     // ### helper functions ###
@@ -111,11 +117,27 @@ function Movie() {
                             </Link></div>
                         )}
                     </div>
+
+                    {reviews &&
+                        reviews.map((review, index) => (
+                            <>
+                                <div className="d-flex flex-row mt-1 border rounded-top m3-review-container">
+                                    <div className="ps-3 pt-2 fs-1 fw-b align-self-end m3-score" >{review.author_details.rating} </div><div className="p-2 align-self-end m3-score">/10</div>
+                                    <div className="p-2 align-self-end flex-grow-1 m3-user">by {review.author_details.username} from TMDB</div>
+                                </div>
+                                <div className=" flex-row mb-3 p-2 border rounded-bottom m3-review">
+                                    {review.content}
+                                </div>
+                            </>
+                        ))}
+
+
                 </div>
             )}
             {/* uncomment to see movie object */}
             {/* <>JSON movie:</>
             <pre>{JSON.stringify(movie, null, 2)}</pre> */}
+            {/* <pre>{JSON.stringify(reviews, null, 2)}</pre> */}
         </>
     )
 }

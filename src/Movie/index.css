@@ -35,3 +35,16 @@
 .m3-movie-overview {
     padding-top: 16px;
 }
+
+.m3-review-container {
+    background-color: #6b86ae;
+}
+
+.m3-score {
+    color: rgb(255, 166, 0);
+    text-shadow: 20px;
+}
+
+.m3-user {
+    font-size: smaller;
+}
