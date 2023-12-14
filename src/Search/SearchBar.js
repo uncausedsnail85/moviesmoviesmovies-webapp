@@ -60,13 +60,6 @@ function SearchBar() {
                     Comapnies
                 </button>
             </div>
-            <div className="p-1 mt-1">
-                <button
-                    className="btn btn-warning"
-                    onClick={() => navigate(`/Search/users/${searchTerm}`)} >
-                    Users
-                </button>
-            </div>
         </div>
     </>)
 }
