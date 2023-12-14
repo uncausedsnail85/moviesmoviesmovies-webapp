@@ -27,7 +27,7 @@ function Home() {
                 numLikesArray.push(likes.length);
             }
             setNumLikes(numLikesArray);
-            console.log(JSON.stringify(`numLikesArray: ${numLikesArray}`))
+            // console.log(JSON.stringify(`numLikesArray: ${numLikesArray}`))
         }
     }
 

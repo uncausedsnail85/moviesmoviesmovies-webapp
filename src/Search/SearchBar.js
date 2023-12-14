@@ -5,13 +5,13 @@ function SearchBar() {
     const navigate = useNavigate();
     // var searchParam = "";
     let { searchParam } = useParams(); // maintain "state" through URL encoding
-    console.log(`searchParam: ${searchParam}`)
+    // console.log(`searchParam: ${searchParam}`)
     const [searchTerm, setSearchTerm] = useState(searchParam); // keeps track of search term in search bar
     console.log(`searchTerm: ${searchTerm}`)
 
     useEffect(() => {
         setSearchTerm(searchParam)
-        console.log(`in use effect" searchTerm: ${searchTerm}`)
+        // console.log(`in use effect" searchTerm: ${searchTerm}`)
     }, [searchParam])
 
     return (<>

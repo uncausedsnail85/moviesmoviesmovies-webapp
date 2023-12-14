@@ -24,7 +24,7 @@ function Signin() {
         } else {
             // success
             dispatch(setUser(results));
-            navigate(-1);
+            navigate(-2);
         }
     };
 
