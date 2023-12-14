@@ -37,7 +37,7 @@ function SearchBar() {
                 </button>
             </div>
         </div>
-        <div className="mb-3 d-flex flex-row">
+        <div className="mb-3 d-flex flex-row flex-wrap">
             <div className="p-2 mt-1">Show only: </div>
             <div className="p-1 mt-1">
                 <button

@@ -45,10 +45,10 @@ function CompanyResults({ maxResults = -1 }) {
                     results.map((company, index) => (
                         <li key={index} className="list-group-item d-flex flex-row ">
                             <div className="p-2">
-                                <img
+                                {company.logo_path && company.logo_path && <img
                                     src={`https://image.tmdb.org/t/p/w92/${company.logo_path }`}
                                     alt={company.title}
-                                />
+                                />}
                             </div>
                             <div className="p-2">
                                 <h4><Link to={`/details/company/${company.id}`}> {company.name}</Link></h4>

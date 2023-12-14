@@ -90,7 +90,7 @@ function Movie() {
                     <div className="row cast">
                         Cast: {movieCredits.map(cast => cast.name).join(', ')}
                     </div>
-                    <div className="d-flex flex-row mt-3 mb-3 companies align-items-center ">
+                    <div className="d-flex flex-row mt-3 mb-3 companies align-items-center flex-wrap">
                         {movie.production_companies.map((company, index) =>
                             <div className="ps-3 pe-3 border-end border-start "><Link to={`/details/company/${company.id}`}>
                                 {company.logo_path && <img
@@ -104,8 +104,8 @@ function Movie() {
                 </div>
             )}
             {/* uncomment to see movie object */}
-            {/* <>JSON movie:</>
-            <pre>{JSON.stringify(movie, null, 2)}</pre> */}
+            <>JSON movie:</>
+            <pre>{JSON.stringify(movie, null, 2)}</pre>
         </>
     )
 }
