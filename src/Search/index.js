@@ -24,6 +24,7 @@ function Search() {
             <Routes>
                 <Route path="/*" element={<SearchBar  />} />
                 <Route path="/:searchParam" element={<SearchBar />} />
+                <Route path="/all/:searchParam" element={<SearchBar />} />
             </Routes>
             <Routes>
                 <Route path="/:searchParam" element={<Results />} />
