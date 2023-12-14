@@ -3,22 +3,41 @@ import { useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 
 import * as tmdbClient from "../client/tmdbClient"
+import * as likesClient from "../Likes/client"
 import "./index.css";
 
 function Home() {
 
     const { user } = useSelector((state) => state.userReducer);
     const [trendingMovies, setTrendingMovies] = useState(null);
+    const [numLikes, setNumLikes] = useState([]);
+
 
     const getTrendingMovies = async () => {
-        const results = await tmdbClient.getPopularMovies();
-        setTrendingMovies(results.slice(0, 6));
+        let results = await tmdbClient.getPopularMovies();
+        results = results.slice(0, 6);
+        await setTrendingMovies(results);
     }
 
+    const getNumberLikes = async () => {
+        let numLikesArray = []
+        if (trendingMovies) {
+            for (let i = 0; i < trendingMovies.length; i++) {
+                let likes = await likesClient.findUsernamesThatLikeMovie(trendingMovies[i].id);
+                numLikesArray.push(likes.length);
+            }
+            setNumLikes(numLikesArray);
+            console.log(JSON.stringify(`numLikesArray: ${numLikesArray}`))
+        }
+    }
 
     useEffect(() => {
         getTrendingMovies();
     }, []);
+
+    useEffect(() => {
+        getNumberLikes()
+    }, [trendingMovies])
 
     return (
         <div>
@@ -43,7 +62,7 @@ function Home() {
                 {user == "" && <h2>Check out trending shows</h2>}
                 {user.username && <h2>Today's Trending</h2>}
                 <div className="d-flex flex-wrap m3-trending justify-content-center">
-                    {trendingMovies && trendingMovies.map((trendingMovie) => (
+                    {trendingMovies && trendingMovies.map((trendingMovie, index) => (
                         <div class="card m3-trending-card">
                             <div class="card-body text-truncate" style={{ maxWidth: 186 }}>
                                 <Link key={trendingMovies.id} to={`/details/${trendingMovie.id}`} className="card-link">
@@ -54,9 +73,9 @@ function Home() {
                                     <br />
                                     {trendingMovie.title} <br />
 
-                    
+
                                     {/* <button>Likes</button> */}
-                                    <span class="badge bg-success m3-trendingbadge">0 Likes</span>
+                                    <span class="badge bg-success m3-trendingbadge">{numLikes[index]} Likes</span>
                                     {/* <span class="badge bg-success m3-trendingbadge">0 Discussions</span> */}
                                 </Link>
                             </div>
