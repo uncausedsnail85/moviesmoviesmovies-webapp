@@ -3,6 +3,7 @@ import axios from "axios";
 export const TMDB_URL = process.env.REACT_APP_TMDB_URL; // https://api.themoviedb.org/3
 export const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 
+// #### MOVIES ####
 export const findMovies = async (searchTerm) => {
     const url = `${TMDB_URL}/search/movie?query=${searchTerm}&include_adult=false&language=en-US&page=1&api_key=${TMDB_API_KEY}`
     const response = await axios.get(
@@ -31,6 +32,8 @@ export const getPopularMovies = async () => {
     return response.data.results;   
 }
 
+
+// #### TV SHOWS ####
 export const findTvShows = async (searchTerm) => {
     const url = `${TMDB_URL}/search/tv?query=${searchTerm}&include_adult=false&language=en-US&page=1&api_key=${TMDB_API_KEY}`;
     const response = await axios.get(url);
@@ -49,4 +52,19 @@ export const getShowCreditsfromTmdbId = async (tmdbId) => {
     // https://api.themoviedb.org/3/tv/{series_id}/credits
     const response = await axios.get(url);
     return response.data.cast;
+}
+
+// #### COMAPNIES ####
+export const findCompanies = async (searchTerm) => {
+    const url = `${TMDB_URL}/search/company?query=${searchTerm}&include_adult=false&language=en-US&page=1&api_key=${TMDB_API_KEY}`;
+    // https://api.themoviedb.org/3/search/company
+    const response = await axios.get(url);
+    return response.data.results;
+}
+
+export const getCompanyDetailsfromTmdbId = async (tmdbId) => {
+    const url = `${TMDB_URL}/company/${tmdbId}?api_key=${TMDB_API_KEY}`
+    // https://api.themoviedb.org/3/company/{company_id}
+    const response = await axios.get(url);
+    return response.data;
 }
