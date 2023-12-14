@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 // component displaying the details of a tvshow
 // should have tmdbId param
 function TvShow() {
-    
+
 
     const { tmdbId } = useParams();
     const { user } = useSelector((state) => state.userReducer);
@@ -19,7 +19,7 @@ function TvShow() {
     const [movieCredits, setMovieCredits] = useState([])
     const [likes, setLikes] = useState([0]);
 
-    
+
     //SW 1212 working on likes
     const currentUserLikesMovie = async (tmdbId) => {
         const likes = await likesClient.createUserLikesMovie(user.username, tmdbId)
@@ -39,14 +39,14 @@ function TvShow() {
     }
 
     const getMovieLikes = async (tmdbId) => {
-        
+
     }
 
     useEffect(() => {
-  
+
         getMovieDetailsFromTmdbId(tmdbId)
         getMovieCreditsfromTmdbId(tmdbId)
-   
+
     }, [])
 
     // ### helper functions ###
@@ -61,7 +61,7 @@ function TvShow() {
         <>
             {movie && (
                 <div>
-                    
+
                     <div className="row m3-detailtitle">
                         <div className="m3-detailtitle-text">
                             <h1>{movie.name}</h1>
@@ -93,9 +93,20 @@ function TvShow() {
                             </div>
                         </div>
                     </div>
-                    <hr/>
+                    <hr />
                     <div className="row cast">
                         Cast: {movieCredits.map(cast => cast.name).join(', ')}
+                    </div>
+                    <div className="d-flex flex-row mt-3 mb-3 companies align-items-center ">
+                        {movie.production_companies.map((company, index) =>
+                            <div className="ps-3 pe-3 border-end border-start "><Link to={`/details/company/${company.id}`}>
+                                {company.logo_path && <img
+                                    src={`https://image.tmdb.org/t/p/w92/${company.logo_path}`}
+                                    alt={company.name}
+                                />}
+                                {!company.logo_path && company.name}
+                            </Link></div>
+                        )}
                     </div>
                 </div>
             )}
