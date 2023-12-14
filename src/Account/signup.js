@@ -126,8 +126,8 @@ function Signup() {
             Cancel
         </button>
         <br />
-        <>User object:</>
-        <pre>{JSON.stringify(user, null, 2)}</pre>
+        {/* <>User object:</>
+        <pre>{JSON.stringify(user, null, 2)}</pre> */}
     </>)
 }
 

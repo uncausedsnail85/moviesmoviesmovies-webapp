@@ -32,10 +32,11 @@ export const testCall = async () => {
     return response.data;
 }
 
-// export const updateUser = async (user) => {
-//     const response = await request.put(`${USERS_API}/${user._id}`, user);
-//     return response.data;
-// };
+export const updateUser = async (user) => {
+    const response = await request.put(`${USERS_API}/${user.username}`, user);
+   // "/api/users/:username"
+    return response.data;
+};
 
 export const findAllUsers = async () => {
     const response = await request.get(`${USERS_API}`);
@@ -46,7 +47,7 @@ export const findUserByUsername = async (username) => {
     const response = await request.get(`${USERS_API}/username/${username}`);
     return response.data;
 };
-
+    
 // export const createUser = async (user) => {
 //     const response = await request.post(`${USERS_API}`, user);
 //     return response.data;
