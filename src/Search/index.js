@@ -5,6 +5,7 @@ import Results from "./Results.js";
 import SearchBar from "./SearchBar.js";
 import MovieResults from "./MovieResults.js";
 import UserResults from "./UserResults.js";
+import TvShowResults from "./TvShowResults.js";
 
 // Search component
 function Search() {
@@ -29,6 +30,7 @@ function Search() {
                 <Route path="/all/:searchParam" element={<Results />} />
                 <Route path="/movies/:searchParam" element={<MovieResults />} />
                 <Route path="/users/:searchParam" element={<UserResults />} />
+                <Route path="/shows/:searchParam" element={<TvShowResults />} />
                 {/* <Route path="/:searchObject/:searchParam" element={<Results />} /> */}
             </Routes>
         </>

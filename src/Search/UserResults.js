@@ -3,36 +3,36 @@ import { Link, useParams, useNavigate, Routes, Route } from "react-router-dom";
 import * as client from "../client/userClient"
 
 function UserResults(maxResults = -1) {
-    // const navigate = useNavigate();
+    // // const navigate = useNavigate();
 
-    const { searchParam } = useParams(); // maintain "state" through URL encoding
-    // const [searchTerm, setSearchTerm] = useState(searchParam); // keeps track of search term in search bar
-    const [results, setResults] = useState(null); // keeps track of any displayed results
-    const [untrimmedResultLength, setUntrimmedResultLength] = useState(-1);
+    // const { searchParam } = useParams(); // maintain "state" through URL encoding
+    // // const [searchTerm, setSearchTerm] = useState(searchParam); // keeps track of search term in search bar
+    // const [results, setResults] = useState(null); // keeps track of any displayed results
+    // const [untrimmedResultLength, setUntrimmedResultLength] = useState(-1);
 
-    // Get list of movie results
-    const getSearchedUsersResults = async (searchParam) => {
-        const results = await client.findUserByUsername(searchParam);
-        if (results == null) {
-            return;
-        }
-        setUntrimmedResultLength(results.length);
-        if (maxResults < 0) {
-            setResults(results)
+    // // Get list of movie results
+    // const getSearchedUsersResults = async (searchParam) => {
+    //     const results = await client.findUserByUsername(searchParam);
+    //     if (results == null) {
+    //         return;
+    //     }
+    //     setUntrimmedResultLength(results.length);
+    //     if (maxResults < 0) {
+    //         setResults(results)
 
-        } else {
-            setResults(results.slice(0, maxResults));
-        }
-    }
+    //     } else {
+    //         setResults(results.slice(0, maxResults));
+    //     }
+    // }
 
-    useEffect(() => {
-        // if there is a search in the URL, get results
-        if (searchParam) {
-            getSearchedUsersResults(searchParam);
-        } else {
-            setResults(null);
-        }  // else reset
-    }, [searchParam]); // if the searchParam ever changes, re-update the results
+    // useEffect(() => {
+    //     // if there is a search in the URL, get results
+    //     if (searchParam) {
+    //         getSearchedUsersResults(searchParam);
+    //     } else {
+    //         setResults(null);
+    //     }  // else reset
+    // }, [searchParam]); // if the searchParam ever changes, re-update the results
     return (
         <div>
 
