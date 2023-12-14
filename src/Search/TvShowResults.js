@@ -20,7 +20,7 @@ function TvShowResults({ maxResults = -1 }) {
         setUntrimmedResultLength(results.length);
         if (maxResults < 0) {
             setResults(results)
-            
+
         } else {
             setResults(results.slice(0, maxResults));
         }
@@ -45,10 +45,10 @@ function TvShowResults({ maxResults = -1 }) {
                     results.map((show, index) => (
                         <li key={index} className="list-group-item d-flex flex-row ">
                             <div className="p-2">
-                                <img
+                                {show.poster_path && <img
                                     src={`https://image.tmdb.org/t/p/w92/${show.poster_path}`}
                                     alt={show.title}
-                                />
+                                />}
                             </div>
                             <div className="p-2">
                                 <h4><Link to={`/details/show/${show.id}`}> {show.name}</Link></h4>
@@ -61,7 +61,7 @@ function TvShowResults({ maxResults = -1 }) {
             </ul>
             {maxResults >= 0 && untrimmedResultLength - maxResults > 0 && <div>
                 <Link to={`/Search/shows/${searchParam}`}>{untrimmedResultLength - maxResults} more results... </Link>
-                </div>}
+            </div>}
             {/* <>JSON results:</>
             <pre>{JSON.stringify(results, null, 2)}</pre> */}
         </div>

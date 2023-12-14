@@ -44,10 +44,10 @@ function MovieResults({ maxResults = -1 }) {
                     results.map((movie, index) => (
                         <li key={index} className="list-group-item d-flex flex-row ">
                             <div className="p-2">
-                                <img
+                            {movie.poster_path && <img
                                     src={`https://image.tmdb.org/t/p/w92/${movie.poster_path}`}
                                     alt={movie.title}
-                                />
+                                />}
                             </div>
                             <div className="p-2">
                                 <h4><Link to={`/details/${movie.id}`}> {movie.title}</Link></h4>
