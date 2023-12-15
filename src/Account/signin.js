@@ -37,9 +37,9 @@ function Signin() {
         // check if already logged in, if so redirect
         // console.log(`user: ${user}`)
         if (user !== "") {
-            navigate(`/home`);
+            navigate(`/profile/${user.username}`);
         }
-    }, [credentials]);
+    }, [user]);
 
     return (
         <div>
