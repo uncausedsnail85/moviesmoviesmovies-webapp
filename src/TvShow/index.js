@@ -20,12 +20,47 @@ function TvShow() {
     const [likes, setLikes] = useState([0]);
     const [reviews, setReviews] = useState([]);
 
+    const navigate = useNavigate();
+    const [userHasLiked, setUserHasLiked] = useState(false);
 
-    //SW 1212 working on likes
     const currentUserLikesMovie = async (tmdbId) => {
-        const likes = await likesClient.createUserLikesMovie(user.username, tmdbId)
+        try {
+            const likes = await likesClient.createUserLikesMovie(user.username, tmdbId);
+            await getLikes(tmdbId);
+        } catch (error) {
+            if (error.response && error.response.status === 400) {
+                // Display the error message from the server
+                alert(error.response.data.message);
+            } else {
+                console.error("Error liking movie:", error);
+            }
+        }
+    };
 
-    }
+    const handleLikeClick = async (tmdbId) => {
+        await currentUserLikesMovie(tmdbId);
+        await getLikes(tmdbId); // This will update userHasLiked based on actual data
+    };
+
+
+    const handleUnlikeClick = async (tmdbId) => {
+        try {
+            await likesClient.deleteUserLikesMovie(user.username, tmdbId);
+            await getLikes(tmdbId);
+        } catch (error) {
+            console.error("Error unliking movie:", error);
+        }
+    };
+
+    const getLikes = async (tmdbId) => {
+        const results = await likesClient.findUsernamesThatLikeMovie(tmdbId);
+        const validResults = results.filter(obj => obj.username && obj.username !== 'undefined');
+        const flatResult = validResults.map(obj => obj.username);
+        setLikes(flatResult);
+
+        setUserHasLiked(flatResult.includes(user.username));
+    };
+
     // ### api calls ###
     const getMovieDetailsFromTmdbId = async (tmdbId) => {
         const results = await client.getShowDetailsfromTmdbId(tmdbId);
@@ -39,10 +74,6 @@ function TvShow() {
         // console.log(JSON.stringify(filteredResults));
     }
 
-    const getMovieLikes = async (tmdbId) => {
-
-    }
-
     const getShowReviews = async (tmdbId) => {
         const results = await client.getReviewsFromShowId(tmdbId);
         setReviews(results);
@@ -53,8 +84,8 @@ function TvShow() {
         getMovieDetailsFromTmdbId(tmdbId)
         getMovieCreditsfromTmdbId(tmdbId)
         getShowReviews(tmdbId)
-
-    }, [])
+        getLikes(tmdbId);
+    }, [tmdbId])
 
     return (
         <>
@@ -67,28 +98,40 @@ function TvShow() {
                             {movie.number_of_seasons} seasons • {movie.first_air_date.slice(0, -6)} - {movie.last_air_date.slice(0, -6)} • {movie.genres.map((genre) => genre.name).join(', ')}</div>
                         <img src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} class="img-fluid" alt="Responsive image" />
                     </div>
+
+                    {/* Movie Overview and Like/Unlike Button */}
                     <div className="row m3-detailcontainer">
                         <div className="col-4 m3-img-col">
-                            <img
-                                src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                                alt={movie.title}
-                                className="img-fluid"
-                            />
+                            <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} className="img-fluid" />
                         </div>
                         <div className="col">
-
-                            <div class="d-flex align-items-start justify-content-around flex-column mb-3 h-100">
-                                <div class="p-2 m3-movie-overview">{movie.overview}</div>
-
-                                {/* //SW 1212 working on likes button*/}
-                                {user.username && (
-                                    <div>
-                                        <button>Like</button>
+                            <div className="d-flex align-items-start justify-content-between flex-column mb-3 h-100">
+                                <div className="p-2 m3-movie-overview">{movie.overview}</div>
+                                <div className="p-2">
+                                    <b>{likes.length}</b> people like this movie
+                                    <br />
+                                    <div className="mt-2 mb-3 fs-6">
+                                        {likes.map(username => (
+                                            <React.Fragment key={username}>
+                                                <Link to={`/profile/${username}`}>{username}</Link>,
+                                            </React.Fragment>
+                                        ))}
                                     </div>
-                                )}
-
-
-                                <div class="p-2">Likes: {likes}</div>
+                                    {user.username && (
+                                        userHasLiked ? (
+                                            <button className="btn btn-secondary" onClick={() => handleUnlikeClick(tmdbId)}>Unlike</button>
+                                        ) : (
+                                            <button className="btn btn-primary" onClick={() => handleLikeClick(tmdbId)}>Like</button>
+                                        )
+                                    )}
+                                    {/* CONDITION IS BAD, BUT == "MOD" NOT WORKING */}
+                                    {user && user.role !== 'USER' && (
+                                        <button className="btn btn-danger ms-3"
+                                            onClick={() => navigate(`/details/${tmdbId}/editlikes`)}>
+                                            EDIT LIKES
+                                        </button>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -120,7 +163,7 @@ function TvShow() {
                                 </div>
                             </>
                         ))}
-                        {reviews.length == 0 && "No reviews founds"}
+                    {reviews.length == 0 && "No reviews founds"}
                     { }
                 </div>
             )}
