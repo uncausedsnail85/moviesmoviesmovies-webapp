@@ -22,6 +22,7 @@ import EditProfile from "./Profile/editProfile.js";
 import Test from "./test.js";
 import Signup from "./Account/signup.js";
 import UserTable from "./Profile/UserTable.js";
+import EditLikes from "./Movie/EditLikes.js";
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path='/search/*' element={<Search />} />
             <Route path="/details/:tmdbMovieId" element={<Movie />} />
+            <Route path="/details/:tmdbMovieId/editlikes" element={<EditLikes />} />            
             <Route path="/details/show/:tmdbId" element={<TvShow />} />
             <Route path="/details/company/:tmdbId" element={<Company />} />
             <Route path="/signin" element={<Signin />} />

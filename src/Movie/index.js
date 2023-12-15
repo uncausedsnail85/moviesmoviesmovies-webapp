@@ -18,6 +18,8 @@ function Movie() {
     const [likes, setLikes] = useState([]);
     const [reviews, setReviews] = useState([]);
 
+    const navigate = useNavigate();
+
     //SW 1212 working on likes
     const currentUserLikesMovie = async (tmdbId) => {
         const likes = await likesClient.createUserLikesMovie(user.username, tmdbId);
@@ -98,6 +100,13 @@ function Movie() {
                                     {user.username && (
                                         <button className="btn btn-primary" onClick={() => { currentUserLikesMovie(movie.id) }}>Like</button>
                                     )}
+                                    {/* CONDITION IS BAD, BUT == "MOD" NOT WORKING */}
+                                    {user && user.role !== 'USER' && (
+                                        <button className="btn btn-danger ms-3"
+                                            onClick={() => navigate(`/details/${tmdbMovieId}/editlikes`)}>
+                                            EDIT LIKES
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -131,11 +140,6 @@ function Movie() {
                             </>
                         ))}
                     {reviews.length == 0 && "No reviews founds"}
-                    { user && (user.role == "ADMIN" || user.role == "MOD") && (
-                        <div>
-                            
-                        </div>
-                    )}
 
                 </div>
             )}
