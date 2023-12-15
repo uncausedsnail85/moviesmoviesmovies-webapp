@@ -36,21 +36,30 @@ function Movie() {
     };
     
     const handleLikeClick = async (tmdbId) => {
-        // Optimistic UI update
-        setLikes((prevLikes) => [...prevLikes, user.username]);
-        
-        // Send request to server
         await currentUserLikesMovie(tmdbId);
-    
-        // Update likes from server
-        await getLikes(tmdbId);
+        await getLikes(tmdbId); // This will update userHasLiked based on actual data
     };
+
+
+    const handleUnlikeClick = async (tmdbId) => {
+        try {
+            await likesClient.deleteUserLikesMovie(user.username, tmdbId);
+            await getLikes(tmdbId);
+        } catch (error) {
+            console.error("Error unliking movie:", error);
+        }
+    };
+
     const getLikes = async (tmdbId) => {
         const results = await likesClient.findUsernamesThatLikeMovie(tmdbId);
-        const flatResult = results.map(obj => obj.username);
-        // console.log(JSON.stringify(flatResult))
+        const validResults = results.filter(obj => obj.username && obj.username !== 'undefined');
+        const flatResult = validResults.map(obj => obj.username);
         setLikes(flatResult);
-    }
+    
+        setUserHasLiked(flatResult.includes(user.username));
+    };
+    
+    
 
     // ### api calls ###
     const getMovieDetailsFromTmdbId = async (tmdbMovieId) => {
@@ -71,11 +80,12 @@ function Movie() {
     }
 
     useEffect(() => {
-        getMovieDetailsFromTmdbId(tmdbMovieId)
-        getMovieCreditsfromTmdbId(tmdbMovieId)
+        getMovieDetailsFromTmdbId(tmdbMovieId);
+        getMovieCreditsfromTmdbId(tmdbMovieId);
         getLikes(tmdbMovieId);
         getMovieReviews(tmdbMovieId);
-    }, [])
+    }, [tmdbMovieId]); // Add tmdbMovieId to dependency array
+    
 
     // ### helper functions ###
     function minutesToHourAndMinutes(num) {
@@ -89,41 +99,47 @@ function Movie() {
         <>
             {movie && (
                 <div>
-
+                    {/* Movie Details Section */}
                     <div className="row m3-detailtitle">
                         <div className="m3-detailtitle-text">
                             <h1>{movie.title}</h1>
-                            {movie.release_date.slice(0, -6)} • {minutesToHourAndMinutes(movie.runtime)} • {movie.genres.map((genre) => genre.name).join(', ')}</div>
-                        <img src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} class="img-fluid" alt="Movie Backdrop" />
+                            {movie.release_date.slice(0, -6)} • {minutesToHourAndMinutes(movie.runtime)} • {movie.genres.map(genre => genre.name).join(', ')}
+                        </div>
+                        <img src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} className="img-fluid" alt="Movie Backdrop" />
                     </div>
+    
+                    {/* Movie Overview and Like/Unlike Button */}
                     <div className="row m3-detailcontainer">
                         <div className="col-4 m3-img-col">
-                            <img
-                                src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                                alt={movie.title}
-                                className="img-fluid"
-                            />
+                            <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} className="img-fluid" />
                         </div>
                         <div className="col">
-                            <div class="d-flex align-items-start justify-content-between flex-column mb-3 h-100">
-                                <div class="p-2 m3-movie-overview">{movie.overview}</div>
-                     
-
-
-                                <div class="p-2">
+                            <div className="d-flex align-items-start justify-content-between flex-column mb-3 h-100">
+                                <div className="p-2 m3-movie-overview">{movie.overview}</div>
+                                <div className="p-2">
                                     <b>{likes.length}</b> people like this movie
                                     <br />
-                                    <div className="mt-2 mb-3 fs-6" >
-                                        {likes.map(username => (<>
-                                            <Link to={`/profile/${username}`}>{username}</Link>, </>))}
+                                    <div className="mt-2 mb-3 fs-6">
+                                        {likes.map(username => (
+                                            <React.Fragment key={username}>
+                                                <Link to={`/profile/${username}`}>{username}</Link>, 
+                                            </React.Fragment>
+                                        ))}
                                     </div>
                                     {user.username && (
-                                        <button className="btn btn-primary" onClick={() => { currentUserLikesMovie(movie.id) }}>Like</button>
+                                        userHasLiked ? (
+                                            <button className="btn btn-secondary" onClick={() => handleUnlikeClick(tmdbMovieId)}>Unlike</button>
+                                        ) : (
+                                            <button className="btn btn-primary" onClick={() => handleLikeClick(tmdbMovieId)}>Like</button>
+                                        )
                                     )}
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
+
                     <hr />
                     <div className="row cast mb-5">
                         Cast: {movieCredits.map(cast => cast.name).join(', ')}
