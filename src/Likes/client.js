@@ -1,12 +1,8 @@
 import axios from "axios";
 
-const REACT_APP_BASE_API_URL = "http://localhost:4000/api";
-
-
-
-const USERS_API = `${REACT_APP_BASE_API_URL}/users`;
-
-const LIKES_API = `${REACT_APP_BASE_API_URL}/likes`;
+export const BASE_API = process.env.REACT_APP_BASE_API_URL;
+export const USERS_API = `${BASE_API}/api/users`;
+const LIKES_API = `${BASE_API}/api/likes`;
 
 export const findAllLikes = async () => {
     const response = await axios.get(`${LIKES_API}`);
