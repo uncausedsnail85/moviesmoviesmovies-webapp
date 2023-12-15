@@ -10,7 +10,9 @@ function SearchBar() {
     console.log(`searchTerm: ${searchTerm}`)
 
     useEffect(() => {
+        console.log("useeffect 1")
         setSearchTerm(searchParam)
+        console.log(`searchParam ue1: ${searchParam}`)
         // console.log(`in use effect" searchTerm: ${searchTerm}`)
     }, [searchParam])
 

@@ -130,7 +130,12 @@ function Movie() {
                                 </div>
                             </>
                         ))}
-                        {reviews.length == 0 && "No reviews founds"}
+                    {reviews.length == 0 && "No reviews founds"}
+                    { user && (user.role == "ADMIN" || user.role == "MOD") && (
+                        <div>
+                            
+                        </div>
+                    )}
 
                 </div>
             )}

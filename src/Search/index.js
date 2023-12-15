@@ -27,6 +27,9 @@ function Search() {
                 <Route path="/*" element={<SearchBar  />} />
                 <Route path="/:searchParam" element={<SearchBar />} />
                 <Route path="/all/:searchParam" element={<SearchBar />} />
+                <Route path="/movies/:searchParam" element={<SearchBar />} />
+                <Route path="/shows/:searchParam" element={<SearchBar />} />
+                <Route path="/companies/:searchParam" element={<SearchBar />} />
             </Routes>
             <Routes>
                 <Route path="/:searchParam" element={<Results />} />
