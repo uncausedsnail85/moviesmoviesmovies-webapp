@@ -95,15 +95,15 @@ function Signup() {
 
             <div className="form-check">
                 <input className="form-check-input" type="radio" name="gridRadios" id="cast"
-                    value={user.role == "CAST"}
+                    value={user.role == "MOD"}
                     onChange={(e) => {
                         if (e.target.checked) {
-                            setUser({ ...user, role: "CAST" })
+                            setUser({ ...user, role: "MOD" })
                         }
                     }}
                 />
                 <label className="form-check-label" for="cast">
-                    Cast</label>
+                    Moderator</label>
             </div>
 
             <div className="form-check disabled">

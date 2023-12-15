@@ -25,7 +25,7 @@ function Signout() {
         } else {
             // TODO: inform user, dialog?
         }
-        navigate(-1);
+        navigate("/home");
     };
 
     useEffect(() => {

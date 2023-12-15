@@ -24,7 +24,7 @@ function Signin() {
         } else {
             // success
             dispatch(setUser(results));
-            navigate(-2);
+            navigate(`profile/${user.username}`);
         }
     };
 
@@ -39,7 +39,7 @@ function Signin() {
         if (user !== "") {
             navigate(`/profile/${user.username}`);
         }
-    }, []);
+    }, [credentials]);
 
     return (
         <div>
@@ -76,7 +76,7 @@ function Signin() {
                     Sign Up </button>
                 <br />
             </form>
-            {signupFlag}
+            {/* {signupFlag} */}
         </div >
     );
 }
