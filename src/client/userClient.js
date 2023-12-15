@@ -60,7 +60,8 @@ export const createUser = async (user) => {
 
 export const deleteUser = async (user) => {
     const response = await request.delete(
-        `${USERS_API}/${user._id}`);
+        `${USERS_API}/${user.username}`);
+        console.log(JSON.stringify(response.data))
     return response.data;
 };
 

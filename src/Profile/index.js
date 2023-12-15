@@ -81,6 +81,12 @@ function Profile() {
                     <div class="col-10 col-sm-7 col-xl-6" >
                         {pageUser.lastName}</div>
                 </div>
+                <div class="row align-items-center m3-profile-row">
+                    <div class="col-2 m3-profile-col1">
+                        Role:</div>
+                    <div class="col-10 col-sm-7 col-xl-6" >
+                        {pageUser.role}</div>
+                </div>
             </>}
 
             {pageUser && loggedInUser.username === pageUsername &&

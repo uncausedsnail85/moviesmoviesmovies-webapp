@@ -14,21 +14,25 @@ function UserTable() {
         const users = await client.findAllUsers();
         setUsers(users);
     };
+
     const [user, setUser] = useState({ username: "", password: "", role: "USER" });
     const createUser = async () => {
         try {
-            const newUser = await client.createUser(user);
+            const newUser = await client.signup(user);
             setUsers([newUser, ...users]);
         } catch (err) {
             console.log(err);
         }
     };
-    const selectUser = async (user) => {
+    const selectUser = async (index) => {
         try {
-            const u = await client.findUserByUsername(user.username);
+            console.log("select start")
+            const u = users[index]
+            console.log(`select found user: ${JSON.stringify(u)}`)
             setUser(u);
+            console.log(`set user`)
         } catch (err) {
-            console.log(err);
+            console.log(`selectUser error: ${err}`);
         }
     };
     const updateUser = async () => {
@@ -50,70 +54,86 @@ function UserTable() {
 
     useEffect(() => { fetchUsers(); }, []);
     return (
-        <> 
-        {loggedInUser && loggedInUser.role !== "ADMIN" &&
-        <div>{"ACCESS DENIED"}</div> }
-        {loggedInUser && loggedInUser.role === "ADMIN" &&
-            <div>
-                <h1>User List</h1>
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <td className="text-nowrap">
-                                User
-                                <input value={user.username} onChange={(e) => setUser({ ...user, username: e.target.value })} />
-                                Pass
-                                <input type="password" value={user.password} onChange={(e) => setUser({ ...user, password: e.target.value })} />
-                            </td>
-                            <td>
-                                <input value={user.firstName} onChange={(e) => setUser({ ...user, firstName: e.target.value })} />
-                            </td>
-                            <td>
-                                <input value={user.lastName} onChange={(e) => setUser({ ...user, lastName: e.target.value })} />
-                            </td>
-                            <td>
-                                <select value={user.role} onChange={(e) => setUser({ ...user, role: e.target.value })}>
-                                    <option value="USER">User</option>
-                                    <option value="ADMIN">Admin</option>
-                                    <option value="FACULTY">Faculty</option>
-                                    <option value="STUDENT">Student</option>
-                                </select>
-                            </td>
-                            <td className="text-nowrap">
-                                <BsFillCheckCircleFill onClick={updateUser}
-                                    className="me-2 text-success fs-1 text" />
-                                <BsPlusCircleFill onClick={createUser}
-                                    className="text-success fs-1 text" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Username</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {users.map((user) => (
-                            <tr key={user._id}>
-                                <td><Link to={`/Kanbas/account/${user._id}`}>
-                                    {user.username}
-                                </Link>
-                                </td>
-                                <td>{user.firstName}</td>
-                                <td>{user.lastName}</td>
+        <>
+            {loggedInUser && loggedInUser.role !== "ADMIN" &&
+                <div>{"ACCESS DENIED"}</div>}
+            {loggedInUser && loggedInUser.role === "ADMIN" &&
+                <div>
+                    <h1>User List</h1>
+                    <table className="table">
+                        <thead>
+                            <tr>
                                 <td className="text-nowrap">
-                                    <button className="btn btn-danger me-2">
-                                        <BsTrash3Fill onClick={() => deleteUser(user)} />
-                                    </button>
-                                    <button className="btn btn-warning me-2">
-                                        <BsPencil onClick={() => selectUser(user)} />
-                                    </button>
+                                    <input placeholder="Username" value={user.username} onChange={(e) => setUser({ ...user, username: e.target.value })} />
                                 </td>
-                            </tr>))}
-                    </tbody>
-                </table>
-            </div>
-        }</>
+                                <td >
+                                    <input placeholder="password" value={user.password} onChange={(e) => setUser({ ...user, password: e.target.value })} />
+
+                                </td>
+                                <td>
+                                    <input placeholder="First Name" value={user.firstName} onChange={(e) => setUser({ ...user, firstName: e.target.value })} />
+                                </td>
+                                <td>
+                                    <input placeholder="Last Name" value={user.lastName} onChange={(e) => setUser({ ...user, lastName: e.target.value })} />
+                                </td>
+                                <td><input placeholder="Email" value={user.email} onChange={(e) => setUser({ ...user, email: e.target.value })} />
+                                </td>
+                                <td>
+                                    <select value={user.role} onChange={(e) => setUser({ ...user, role: e.target.value })}>
+                                        <option value="USER">User</option>
+                                        <option value="ADMIN">Admin</option>
+                                        <option value="MOD  ">Moderator</option>
+                                    </select>
+                                </td>
+                                <td className="text-nowrap">
+                                    <BsFillCheckCircleFill onClick={updateUser}
+                                        className="me-2 text-success fs-1 text" />
+                                    <BsPlusCircleFill onClick={createUser}
+                                        className="text-success fs-1 text" />
+                                </td>
+                            </tr>
+                            <tr>
+
+                            </tr>
+                            <tr>
+                                <th>Username</th>
+                                <th>Password</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {users.map((user, index) => (
+                                <tr key={user._id}>
+                                    <td><Link to={`/profile/${user.username}`}>
+                                        {user.username}
+                                    </Link>
+                                    </td>
+                                    <td>
+                                        {user.password}
+                                    </td>
+                                    <td>{user.firstName}</td>
+                                    <td>{user.lastName}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.role}</td>
+                                    <td className="text-nowrap">
+                                        <button className="btn btn-danger me-2">
+                                            <BsTrash3Fill onClick={() => deleteUser(user)} />
+                                        </button>
+                                        <button className="btn btn-warning me-2">
+                                            <BsPencil onClick={() => selectUser(index)} />
+                                        </button>
+                                    </td>
+                                </tr>))}
+                        </tbody>
+                    </table>
+{/* 
+                    <>JSON selectedd in user:</>
+                    <pre>{JSON.stringify(user, null, 2)}</pre> */}
+                </div>
+            }</>
     );
 }
 export default UserTable;
