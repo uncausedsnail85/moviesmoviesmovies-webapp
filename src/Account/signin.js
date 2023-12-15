@@ -24,7 +24,7 @@ function Signin() {
         } else {
             // success
             dispatch(setUser(results));
-            navigate(`profile/${user.username}`);
+            navigate(`/home`);
         }
     };
 
@@ -37,7 +37,7 @@ function Signin() {
         // check if already logged in, if so redirect
         // console.log(`user: ${user}`)
         if (user !== "") {
-            navigate(`/profile/${user.username}`);
+            navigate(`/home`);
         }
     }, [credentials]);
 
