@@ -8,7 +8,11 @@ const USERS_API = `${REACT_APP_BASE_API_URL}/users`;
 
 const LIKES_API = `${REACT_APP_BASE_API_URL}/likes`;
 
-export const findAllLikes = async () => { };
+export const findAllLikes = async () => {
+    const response = await axios.get(`${LIKES_API}`);
+    return response.data;
+};
+
 
 
 export const createUserLikesMovie = async (username, tmdbId) => {
@@ -17,7 +21,10 @@ export const createUserLikesMovie = async (username, tmdbId) => {
 };
 
 
-export const deleteUserLikesMovie = async (username, tmdbId) => { };
+export const deleteUserLikesMovie = async (username, tmdbId) => {
+    const response = await axios.delete(`${USERS_API}/${username}/likes/${tmdbId}`);
+    return response.data;
+};
 
 
 export const findUsernamesThatLikeMovie = async (tmdbId) => {
