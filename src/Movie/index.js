@@ -17,14 +17,34 @@ function Movie() {
     const [movieCredits, setMovieCredits] = useState([])
     const [likes, setLikes] = useState([]);
     const [reviews, setReviews] = useState([]);
+    const [userHasLiked, setUserHasLiked] = useState(false);
 
-    //SW 1212 working on likes
+
+    
     const currentUserLikesMovie = async (tmdbId) => {
-        const likes = await likesClient.createUserLikesMovie(user.username, tmdbId);
-        await getLikes(tmdbId);
-
+        try {
+            const likes = await likesClient.createUserLikesMovie(user.username, tmdbId);
+            await getLikes(tmdbId);
+        } catch (error) {
+            if (error.response && error.response.status === 400) {
+                // Display the error message from the server
+                alert(error.response.data.message);
+            } else {
+                console.error("Error liking movie:", error);
+            }
+        }
     };
-
+    
+    const handleLikeClick = async (tmdbId) => {
+        // Optimistic UI update
+        setLikes((prevLikes) => [...prevLikes, user.username]);
+        
+        // Send request to server
+        await currentUserLikesMovie(tmdbId);
+    
+        // Update likes from server
+        await getLikes(tmdbId);
+    };
     const getLikes = async (tmdbId) => {
         const results = await likesClient.findUsernamesThatLikeMovie(tmdbId);
         const flatResult = results.map(obj => obj.username);
@@ -87,6 +107,8 @@ function Movie() {
                         <div className="col">
                             <div class="d-flex align-items-start justify-content-between flex-column mb-3 h-100">
                                 <div class="p-2 m3-movie-overview">{movie.overview}</div>
+                     
+
 
                                 <div class="p-2">
                                     <b>{likes.length}</b> people like this movie
